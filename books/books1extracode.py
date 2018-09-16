@@ -1,10 +1,10 @@
 def main():
     if sys.argv.length > 4:
         errorMessage()
-        return []
+        return
     if sys.argv[2] != "books" or sys.argv[2] != "authors":
         errorMessage()
-        return []
+        return
 
     readFile()
 
@@ -14,6 +14,8 @@ def main():
 
 def produceOutput():
     #This function will return a list of all desired output
+
+    #return list of book titles
     if sys.argv[2] == "books":
         titles = []
         for book in library:
@@ -26,6 +28,7 @@ def produceOutput():
 
         return sortedTitles
 
+    #return list of author names
     if sys.argv[2] == "authors":
         authorNames = []
         for book in library:
