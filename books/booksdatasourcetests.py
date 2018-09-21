@@ -23,43 +23,24 @@ class BooksDataSourceTest(unittest.TestCase):
         self.assertEqual(self.data_source.book(20), {'id': 20, 'title': "Sense and Sensibility", 'publication_year': 1813})
 
     def test_book_negative_id(self):
-        self.assertRaises(Exception, self.data_source.book, -10)
+        self.assertRaises(ValueError, self.data_source.book, -10)
 
     def test_book_high_id(self):
-        self.assertRaises(Exception, self.data_source.book, 99999)
+        self.assertRaises(ValueError, self.data_source.book, 99999)
 
     def test_book_type_error(self):
-        self.assertRaises(Exception, self.data_source.book, "hey")
+        self.assertRaises(ValueError, self.data_source.book, "hey")
 
     # testing data_source.books function
 
-    #def test_books_positional_arg(self):
-    #    # If someone types in a positional rather than keyword arg
-    #    self.assertRaises(Exception, self.data_source.books, 12)
-
     def test_books_search_key_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.books, search_text="grandma")
-
-    def test_books_search_key_type_error(self):
-        self.assertRaises(Exception, self.data_source.books, search_text=8)
+        self.assertEqual(self.data_source.books(search_text="grandma"), [])
 
     def test_books_start_year_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.books, start_year=2018)
-
-    def test_books_start_year_type_error(self):
-        self.assertRaises(Exception, self.data_source.books, start_year="hello")
+        self.assertEqual(self.data_source.books(start_year=2018), [])
 
     def test_books_end_year_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.books, end_year=1700)
-
-    def test_books_end_year_type_error(self):
-        self.assertRaises(Exception, self.data_source.books, end_year="banana")
-
-    def test_books_sort_by_invalid_string(self):
-        self.assertRaises(Exception, self.data_source.books, sort_by="ratings")
-
-    def test_books_sort_by_type_error(self):
-        self.assertRaises(Exception, self.data_source.books, sort_by=83)
+        self.assertEqual(self.data_source.books(end_year=1700), [])
 
     # Valid input
 
@@ -106,44 +87,25 @@ class BooksDataSourceTest(unittest.TestCase):
         self.assertEqual(self.data_source.author(4), {'id': 4, 'last_name': 'Austen', 'first_name': 'Jane', 'birth_year': 1775, 'death_year': 1817})
 
     def test_author_negative_id(self):
-        self.assertRaises(Exception, self.data_source.author, -5)
+        self.assertRaises(ValueError, self.data_source.author, -5)
 
     def test_author_high_id(self):
-        self.assertRaises(Exception, self.data_source.author, 99999)
+        self.assertRaises(ValueError, self.data_source.author, 99999)
 
     def test_author_type_error(self):
-        self.assertRaises(Exception, self.data_source.author, "Swag")
+        self.assertRaises(ValueError, self.data_source.author, "Swag")
 
     # testing data_source.authors function
 
-    #def test_authors_positional_arg(self):
-    #    # If someone types in a positional rather than keyword arg
-    #    self.assertRaises(Exception, self.data_source.authors, "Great Expectations")
-
     def test_authors_search_key_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.authors, search_text="Lady Gaga")
-
-    def test_authors_search_key_type_error(self):
-        self.assertRaises(Exception, self.data_source.authors, search_text=9)
+        self.assertEqual(self.data_source.authors(search_text="Lady Gaga"), [])
 
     def test_authors_start_year_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.authors, start_year=2300)
+        self.assertEqual(self.data_source.authors(start_year=2300), [])
         #How do we handle authors with unknown death dates? Maybe restrict user from entering future year?
 
-    def test_authors_start_year_type_error(self):
-        self.assertRaises(Exception, self.data_source.authors, start_year="this year")
-
     def test_authors_end_year_valid_no_results(self):
-        self.assertRaises(Exception, self.data_source.authors, end_year=1700)
-
-    def test_authors_end_year_type_error(self):
-        self.assertRaises(Exception, self.data_source.authors, end_year="last year")
-
-    def test_authors_sort_by_invalid_string(self):
-        self.assertRaises(Exception, self.data_source.authors, sort_by="favorite color")
-
-    def test_authors_sort_by_type_error(self):
-        self.assertRaises(Exception, self.data_source.authors, sort_by=4)
+        self.assertEqual(self.data_source.authors(end_year=1700), [])
 
     # Valid input
 
@@ -182,12 +144,6 @@ class BooksDataSourceTest(unittest.TestCase):
 
 
     # Testing books_for_author / authors_for_book functions
-
-    def test_books_for_author_keyword_arg(self):
-        self.assertRaises(Exception, self.data_source.books_for_author, author_id=6)
-
-    def test_authors_for_book_keyword_arg(self):
-        self.assertRaises(Exception, self.data_source.authors_for_book, book_id=6)
 
     def test_books_for_author_valid(self):
         self.assertEqual(self.data_source.books_for_author(3), [{'id': 4, "title": "Elmer Gantry", 'publication_year': 1927}])
