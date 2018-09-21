@@ -4,10 +4,9 @@
 import sys
 import booksdatasource
 import unittest
-#This allows for more dynamic sorting by keys, and allows multiple levels of sorting.
+#These modules allows for more dynamic sorting by keys, and allows multiple levels of sorting.
 from operator import itemgetter, attrgetter
 
-########### When an operation returns one book, does it return just the dictionary, or is the dictionary wrapped in a list of length 1?
 ##### Tests appear to run wildly out of order? does this mean that the '.' telling us which tests passed is meaningless?
 
 class BooksDataSourceTest(unittest.TestCase):
