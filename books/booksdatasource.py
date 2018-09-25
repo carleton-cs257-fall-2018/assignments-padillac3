@@ -82,18 +82,21 @@ class BooksDataSource:
         self.books_authors_link_filename = books_authors_link_filename
 
         # Data structures: set of books (each will be dictionary), set of authors, list of tuples
-        self.books_raw_data = self.load_books(self.books_filename)
-        self.authors_raw_data = self.load_authors(self.authors_filename)
-        self.links_raw_data = self.load_links(self.books_authors_link_filename)
+        self.books_raw_data = self._load_books(self.books_filename)
+        self.authors_raw_data = self._load_authors(self.authors_filename)
+        self.links_raw_data = self._load_links(self.books_authors_link_filename)
 
-    def load_books(self, filename):
+    def _create_csv_reader(self, filename):
         try:
-            csvFile = open(filename)
+            csvFile = open(filename, encoding="utf-8")
             file_reader = csv.reader(csvFile)
+            return file_reader
         except IOError:
             sys.stderr.write("Error: file not found.")
             exit()
 
+    def _load_books(self, filename):
+        file_reader = self._create_csv_reader(filename)
         dictionary = {}
         for row in file_reader:
             book_id = int(row[0])
@@ -104,14 +107,8 @@ class BooksDataSource:
         return dictionary
 
 
-    def load_authors(self, filename):
-        try:
-            csvFile = open(filename)
-            file_reader = csv.reader(csvFile)
-        except IOError:
-            sys.stderr.write("Error: file not found.")
-            exit()
-
+    def _load_authors(self, filename):
+        file_reader = self._create_csv_reader(filename)
         dictionary = {}
         for row in file_reader:
             author_id = int(row[0])
@@ -126,21 +123,32 @@ class BooksDataSource:
 
         return dictionary
 
-    def load_links(self, filename):
-        try:
-            csvFile = open(filename)
-            file_reader = csv.reader(csvFile)
-        except IOError:
-            sys.stderr.write("Error: file not found.")
-            exit()
-
-        id_list = []
+    def _load_links(self, filename):
+        file_reader = self._create_csv_reader(filename)
+        link_list = []
         for row in file_reader:
             book_id = row[0]
             author_id = row[1]
-            id_list.append((book_id, author_id))
+            link_list.append((book_id, author_id))
 
-        return id_list
+        return link_list
+
+
+    def _get_authors_by_book(self, book_id):
+        author_id_list = []
+        for link in self.links_raw_data:
+            if link[0] == book_id:
+                author_id_list.append(link[1])
+        return author_id_list
+
+
+
+    def _get_books_by_author(self, author_id):
+        book_id_list = []
+        for link in self.links_raw_data:
+            if link[1] == author_id:
+                book_id_list.append(link[0])
+        return book_id_list
 
 
     def book(self, book_id):
@@ -149,7 +157,7 @@ class BooksDataSource:
 
             Raises ValueError if book_id is not a valid book ID.
         '''
-        return {}
+        return self.books_raw_data[book_id]
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -178,7 +186,57 @@ class BooksDataSource:
             QUESTION: How about ValueError? And if so, for which parameters?
             Raises ValueError if author_id is non-None but is not a valid author ID.
         '''
-        return []
+        output_books_dictionary = self.books_raw_data
+
+        if author_id != None:
+            if type(author_id) != int:
+                raise TypeError
+
+            books_with_author_id = self._get_books_by_author(author_id)
+            for book_key in output_books_dictionary:
+                if book_key not in output_books_dictionary.keys():
+                    del output_books_dictionary[book_key]
+
+
+        if search_text != None:
+            if type(search_text) != str:
+                raise TypeError
+
+            for book_key in output_books_dictionary:
+                book = output_books_dictionary[book_key]
+                if search_text not in book['title']:
+                    del output_books_dictionary[book_key]
+
+
+
+        if start_year != None:
+            if type(start_year) != int:
+                raise TypeError
+
+            for book_key in output_books_dictionary:
+                book = output_books_dictionary[book_key]
+                if book["publication_year"] < start_year:
+                    del output_books_dictionary[book_key]
+
+        if end_year != None:
+            if type(end_year) != int:
+                raise TypeError
+
+            for book_key in output_books_dictionary:
+                book = output_books_dictionary[book_key]
+                if book["publication_year"] > end_year:
+                    del output_books_dictionary[book_key]
+
+        #Create and sort list of remaining books
+        output_books_list = list(output_books_dictionary.values())
+
+        # TODO MAKE SURE SORT BY TITLE IS CASE INSENSITIVE
+        if sort_by == "year":
+            output_books_list.sort(key = attrgetter('publication_year', 'title'))
+        else: #sort by title
+            output_books_list.sort(key = attrgetter('title', 'publication_year'))
+
+        return output_books_list
 
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
@@ -186,7 +244,7 @@ class BooksDataSource:
 
             Raises ValueError if author_id is not a valid author ID.
         '''
-        return {}
+        return self.authors_raw_data[author_id]
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
