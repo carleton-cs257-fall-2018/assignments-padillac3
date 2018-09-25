@@ -7,6 +7,10 @@
     CS 257 Software Design class, Fall 2018.
 '''
 
+import csv
+import sys
+from operator import itemgetter, attrgetter
+
 class BooksDataSource:
     '''
     A BooksDataSource object provides access to data about books and authors.
@@ -52,7 +56,7 @@ class BooksDataSource:
                 books: ID,title,publication-year
                   e.g. 6,Good Omens,1990
                        41,Middlemarch,1871
-                    
+
 
                 authors: ID,last-name,first-name,birth-year,death-year
                   e.g. 5,Gaiman,Neil,1960,NULL
@@ -63,7 +67,7 @@ class BooksDataSource:
                   e.g. 41,22
                        6,5
                        6,6
-                  
+
                   [that is, book 41 was written by author 22, while book 6
                     was written by both author 5 and author 6]
 
@@ -73,12 +77,76 @@ class BooksDataSource:
             NOTE TO STUDENTS: I have not specified how you will store the books/authors
             data in a BooksDataSource object. That will be up to you, in Phase 3.
         '''
-        pass
+        self.books_filename = books_filename
+        self.authors_filename = authors_filename
+        self.books_authors_link_filename = books_authors_link_filename
+
+        # Data structures: set of books (each will be dictionary), set of authors, list of tuples
+        self.books_raw_data = self.load_books(self.books_filename)
+        self.authors_raw_data = self.load_authors(self.authors_filename)
+        self.links_raw_data = self.load_links(self.books_authors_link_filename)
+
+    def load_books(self, filename):
+        try:
+            csvFile = open(filename)
+            file_reader = csv.reader(csvFile)
+        except IOError:
+            sys.stderr.write("Error: file not found.")
+            exit()
+
+        dictionary = {}
+        for row in file_reader:
+            book_id = int(row[0])
+            title = row[1]
+            publication_year = int(row[2])
+            dictionary[book_id] = {"id": book_id, "title": title, "publication_year": publication_year}
+
+        return dictionary
+
+
+    def load_authors(self, filename):
+        try:
+            csvFile = open(filename)
+            file_reader = csv.reader(csvFile)
+        except IOError:
+            sys.stderr.write("Error: file not found.")
+            exit()
+
+        dictionary = {}
+        for row in file_reader:
+            author_id = int(row[0])
+            last_name = row[1]
+            first_name = row[2]
+            birth_year = int(row[3])
+            if row[4] == "NULL":
+                death_year = None
+            else:
+                death_year = int(row[4])
+            dictionary[author_id] = {"id": author_id, "last_name": last_name, "first_name" : first_name, "birth_year": birth_year, "death_year": death_year}
+
+        return dictionary
+
+    def load_links(self, filename):
+        try:
+            csvFile = open(filename)
+            file_reader = csv.reader(csvFile)
+        except IOError:
+            sys.stderr.write("Error: file not found.")
+            exit()
+
+        id_list = []
+        for row in file_reader:
+            book_id = row[0]
+            author_id = row[1]
+            id_list.append((book_id, author_id))
+
+        return id_list
+
 
     def book(self, book_id):
         ''' Returns the book with the specified ID. (See the BooksDataSource comment
             for a description of how a book is represented.)
-        
+
             Raises ValueError if book_id is not a valid book ID.
         '''
         return {}
@@ -100,7 +168,7 @@ class BooksDataSource:
 
                 'year' -- sorts by publication_year, breaking ties with (case-insenstive) title
                 default -- sorts by (case-insensitive) title, breaking ties with publication_year
-                
+
             See the BooksDataSource comment for a description of how a book is represented.
 
             QUESTION: Should Python interfaces specify TypeError?
@@ -115,7 +183,7 @@ class BooksDataSource:
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
             description of how an author is represented.)
-        
+
             Raises ValueError if author_id is not a valid author ID.
         '''
         return {}
@@ -142,7 +210,7 @@ class BooksDataSource:
                     then (case-insensitive) first_name
                 any other value - sorts by (case-insensitive) last_name, breaking ties with
                     (case-insensitive) first_name, then birth_year
-        
+
             See the BooksDataSource comment for a description of how an author is represented.
         '''
         return []
@@ -166,3 +234,5 @@ class BooksDataSource:
             See the BooksDataSource comment for a description of how an author is represented. '''
         return self.authors(book_id=book_id)
 
+if __name__ == '__main__':
+    test = BooksDataSource("books.csv", "authors.csv", "books_authors.csv")
