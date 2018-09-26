@@ -124,7 +124,7 @@ class BooksDataSourceTest(unittest.TestCase):
         #Checks to make sure the list is 7 authors long
 
     def test_authors_valid_sort_by(self):
-        self.assertEqual(self.data_source.authors(sort_by='birth_year'), self.data_source.authors(sort_by="birth_year").sort(key=attrgetter('birth_year', 'last_name', 'first_name')))
+        self.assertEqual(self.data_source.authors(sort_by='birth_year'), self.data_source.authors(sort_by="birth_year").sort(key=itemgetter('birth_year', 'last_name', 'first_name')))
 
     def test_authors_book_id_and_search_text(self):
         self.assertEqual(self.data_source.authors(book_id=6, search_text="Neil"), [{'id': 5, 'last_name': "Gaiman", 'first_name': "Neil", 'birth_year': 1960, 'death_year': None}])

@@ -127,14 +127,14 @@ class BooksDataSource:
         file_reader = self._create_csv_reader(filename)
         link_list = []
         for row in file_reader:
-            book_id = row[0]
-            author_id = row[1]
+            book_id = int(row[0])
+            author_id = int(row[1])
             link_list.append((book_id, author_id))
 
         return link_list
 
 
-    def _get_authors_by_book(self, book_id):
+    def _get_author_ids_by_book(self, book_id):
         author_id_list = []
         for link in self.links_raw_data:
             if link[0] == book_id:
@@ -143,10 +143,11 @@ class BooksDataSource:
 
 
 
-    def _get_books_by_author(self, author_id):
+    def _get_book_ids_by_author(self, author_id):
+        print(author_id)
         book_id_list = []
         for link in self.links_raw_data:
-            if link[1] == author_id:
+            if int(link[1]) == author_id:
                 book_id_list.append(link[0])
         return book_id_list
 
@@ -157,7 +158,10 @@ class BooksDataSource:
 
             Raises ValueError if book_id is not a valid book ID.
         '''
-        return self.books_raw_data[book_id]
+        if type(book_id) != int or book_id < 0 or book_id > len(self.books_raw_data):
+            raise ValueError
+        else:
+            return self.books_raw_data[book_id]
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -186,57 +190,96 @@ class BooksDataSource:
             QUESTION: How about ValueError? And if so, for which parameters?
             Raises ValueError if author_id is non-None but is not a valid author ID.
         '''
-        output_books_dictionary = self.books_raw_data
+        output_books_list = list(self.books_raw_data.values())
+
+        print("initial")
+        print(output_books_list)
 
         if author_id != None:
             if type(author_id) != int:
                 raise TypeError
 
-            books_with_author_id = self._get_books_by_author(author_id)
-            for book_key in output_books_dictionary:
-                if book_key not in output_books_dictionary.keys():
-                    del output_books_dictionary[book_key]
+            book_id_list = self._get_book_ids_by_author(author_id)
+            print(book_id_list)
+
+            def filter_author_id(book):
+                print(book)
+                print(book['id'])
+                print(book_id_list)
+                if book['id'] in book_id_list:
+                    print("true")
+                    return True
+                return False
+
+            temp = output_books_list
+            output_books_list = list(filter(filter_author_id, temp))
+
+        print("author_id")
+        print(output_books_list)
 
 
         if search_text != None:
             if type(search_text) != str:
                 raise TypeError
 
-            for book_key in output_books_dictionary:
-                book = output_books_dictionary[book_key]
-                if search_text not in book['title']:
-                    del output_books_dictionary[book_key]
+            def filter_search_text(book):
+                if search_text.lower() in book['title'].lower():
+                    return True
+                return False
 
+            temp = output_books_list
+            output_books_list = list(filter(filter_search_text, temp))
+
+        print("search_text")
+        print(output_books_list)
 
 
         if start_year != None:
             if type(start_year) != int:
                 raise TypeError
 
-            for book_key in output_books_dictionary:
-                book = output_books_dictionary[book_key]
-                if book["publication_year"] < start_year:
-                    del output_books_dictionary[book_key]
+            def filter_start_year(book):
+                if book['publication_year'] >= start_year:
+                    return True
+                return False
+
+            temp = output_books_list
+            output_books_list = list(filter(filter_start_year, temp))
+
+        print("start_year")
+        print(output_books_list)
 
         if end_year != None:
             if type(end_year) != int:
                 raise TypeError
 
-            for book_key in output_books_dictionary:
-                book = output_books_dictionary[book_key]
-                if book["publication_year"] > end_year:
-                    del output_books_dictionary[book_key]
+            def filter_end_year(book):
+                if book['publication_year'] <= end_year:
+                    return True
+                return False
+
+            temp = output_books_list
+            output_books_list = list(filter(filter_end_year, temp))
+
+        print("end_year")
+        print(output_books_list)
 
         #Create and sort list of remaining books
-        output_books_list = list(output_books_dictionary.values())
+        output_books_list = list(output_books_list)
 
         # TODO MAKE SURE SORT BY TITLE IS CASE INSENSITIVE
         if sort_by == "year":
-            output_books_list.sort(key = attrgetter('publication_year', 'title'))
+            output_books_list.sort(key = itemgetter('publication_year', 'title'))
         else: #sort by title
-            output_books_list.sort(key = attrgetter('title', 'publication_year'))
+            output_books_list.sort(key = itemgetter('title', 'publication_year'))
+
+        print("sorted")
+        print(output_books_list)
 
         return output_books_list
+
+
+
 
     def author(self, author_id):
         ''' Returns the author with the specified ID. (See the BooksDataSource comment for a
@@ -244,7 +287,10 @@ class BooksDataSource:
 
             Raises ValueError if author_id is not a valid author ID.
         '''
-        return self.authors_raw_data[author_id]
+        if type(author_id) != int or author_id < 0 or author_id > len(self.authors_raw_data):
+            raise ValueError
+        else:
+            return self.authors_raw_data[author_id]
 
     def authors(self, *, book_id=None, search_text=None, start_year=None, end_year=None, sort_by='birth_year'):
         ''' Returns a list of all the authors in this data source matching all of the
@@ -271,7 +317,72 @@ class BooksDataSource:
 
             See the BooksDataSource comment for a description of how an author is represented.
         '''
-        return []
+        output_authors_list = list(self.authors_raw_data.values())
+
+        if book_id != None:
+            if type(book_id) != int:
+                raise TypeError
+
+            author_id_list = self._get_author_ids_by_book(book_id)
+
+            def filter_book_id(author):
+                if author['id'] in author_id_list:
+                    return True
+                return False
+
+            temp = output_authors_list
+            output_authors_list = list(filter(filter_book_id, temp))
+
+
+        if search_text != None:
+            if type(search_text) != str:
+                raise TypeError
+
+            def filter_search_text(author):
+                if search_text.lower() in (author['first_name'] + author['last_name']).lower():
+                    return True
+                return False
+
+            temp = output_authors_list
+            output_authors_list = list(filter(filter_search_text, temp))
+
+
+        if start_year != None:
+            if type(start_year) != int:
+                raise TypeError
+
+            def filter_start_year(author):
+                if author['death_year'] == None or author['death_year'] > start_year:
+                    return True
+                return False
+
+            temp = output_authors_list
+            output_authors_list = list(filter(filter_start_year, temp))
+
+        if end_year != None:
+            if type(end_year) != int:
+                raise TypeError
+
+            def filter_end_year(author):
+                if author['birth_year'] < end_year:
+                    return True
+                return False
+
+            temp = output_authors_list
+            output_authors_list = list(filter(filter_end_year, temp))
+
+        #Create and sort list of remaining authors
+        output_authors_list = list(output_authors_list)
+
+        # TODO MAKE SURE SORT BY TITLE IS CASE INSENSITIVE
+        if sort_by == "birth_year":
+            output_authors_list.sort(key = itemgetter('birth_year', 'last_name', 'first_name'))
+        else: #sort by title
+            output_authors_list.sort(key = itemgetter('last_name', 'first_name', 'birth_year'))
+
+        return output_authors_list
+
+
 
 
     # Note for my students: The following two methods provide no new functionality beyond
@@ -294,3 +405,5 @@ class BooksDataSource:
 
 if __name__ == '__main__':
     test = BooksDataSource("books.csv", "authors.csv", "books_authors.csv")
+
+    test.books(author_id=6)
