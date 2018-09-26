@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 #Yasmeen Awad and Chris Padilla
+# September 25, 2018
 '''
     booksdatasource.py
     Jeff Ondich, 18 September 2018
@@ -12,7 +13,7 @@
 import csv
 import sys
 import datetime
-from operator import itemgetter, attrgetter
+from operator import itemgetter
 
 class BooksDataSource:
     '''
@@ -84,11 +85,9 @@ class BooksDataSource:
         self.authors_filename = authors_filename
         self.books_authors_link_filename = books_authors_link_filename
 
-        # Data structures: set of books (each will be dictionary), set of authors, list of tuples
         self.books_raw_data = self._load_books(self.books_filename)
         self.authors_raw_data = self._load_authors(self.authors_filename)
         self.links_raw_data = self._load_links(self.books_authors_link_filename)
-
 
 
     def _create_csv_reader(self, filename):
@@ -99,6 +98,7 @@ class BooksDataSource:
         except IOError:
             sys.stderr.write("Error: file not found.")
             exit()
+
 
     def _load_books(self, filename):
         file_reader, csvFile = self._create_csv_reader(filename)
@@ -130,6 +130,7 @@ class BooksDataSource:
         csvFile.close()
         return dictionary
 
+
     def _load_links(self, filename):
         file_reader, csvFile = self._create_csv_reader(filename)
         link_list = []
@@ -150,7 +151,6 @@ class BooksDataSource:
         return author_id_list
 
 
-
     def _get_book_ids_by_author(self, author_id):
         book_id_list = []
         for link in self.links_raw_data:
@@ -169,6 +169,7 @@ class BooksDataSource:
             raise ValueError
         else:
             return self.books_raw_data[book_id]
+
 
     def books(self, *, author_id=None, search_text=None, start_year=None, end_year=None, sort_by='title'):
         ''' Returns a list of all the books in this data source matching all of
@@ -215,7 +216,6 @@ class BooksDataSource:
             output_books_list = list(filter(filter_author_id, temp))
 
 
-
         if search_text != None:
             if type(search_text) != str:
                 raise TypeError
@@ -241,6 +241,7 @@ class BooksDataSource:
             temp = output_books_list
             output_books_list = list(filter(filter_start_year, temp))
 
+
         if end_year != None:
             if type(end_year) != int:
                 raise TypeError
@@ -253,20 +254,15 @@ class BooksDataSource:
             temp = output_books_list
             output_books_list = list(filter(filter_end_year, temp))
 
-
-        #Create and sort list of remaining books
         output_books_list = list(output_books_list)
 
-        # TODO MAKE SURE SORT BY TITLE IS CASE INSENSITIVE
+
         if sort_by == "year":
             output_books_list.sort(key = itemgetter('publication_year', 'title'))
-        else: #sort by title
+        else:
             output_books_list.sort(key = itemgetter('title', 'publication_year'))
 
-
         return output_books_list
-
-
 
 
     def author(self, author_id):
@@ -361,10 +357,8 @@ class BooksDataSource:
             temp = output_authors_list
             output_authors_list = list(filter(filter_end_year, temp))
 
-        #Create and sort list of remaining authors
         output_authors_list = list(output_authors_list)
 
-        # TODO MAKE SURE SORT BY TITLE IS CASE INSENSITIVE
         if sort_by == "birth_year":
             output_authors_list.sort(key = itemgetter('birth_year', 'last_name', 'first_name'))
         else: #sort by title
@@ -392,9 +386,3 @@ class BooksDataSource:
         ''' Returns a list of all the authors of the book with the specified book ID.
             See the BooksDataSource comment for a description of how an author is represented. '''
         return self.authors(book_id=book_id)
-
-if __name__ == '__main__':
-    test = BooksDataSource("books.csv", "authors.csv", "books_authors.csv")
-
-    print(test.authors().sort(key = itemgetter('last_name', 'first_name', 'birth_year')))
-    print(sorted(test.authors(), key = itemgetter('last_name')))
