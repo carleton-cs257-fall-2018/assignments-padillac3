@@ -203,7 +203,7 @@ class BooksDataSource:
 
         if author_id != None:
             if type(author_id) != int:
-                raise TypeError
+                raise ValueError
 
             book_id_list = self._get_book_ids_by_author(author_id)
 
@@ -218,7 +218,7 @@ class BooksDataSource:
 
         if search_text != None:
             if type(search_text) != str:
-                raise TypeError
+                raise ValueError
 
             def filter_search_text(book):
                 if search_text.lower() in book['title'].lower():
@@ -231,7 +231,7 @@ class BooksDataSource:
 
         if start_year != None:
             if type(start_year) != int:
-                raise TypeError
+                raise ValueError
 
             def filter_start_year(book):
                 if book['publication_year'] >= start_year:
@@ -244,7 +244,7 @@ class BooksDataSource:
 
         if end_year != None:
             if type(end_year) != int:
-                raise TypeError
+                raise ValueError
 
             def filter_end_year(book):
                 if book['publication_year'] <= end_year:
@@ -305,7 +305,7 @@ class BooksDataSource:
 
         if book_id != None:
             if type(book_id) != int:
-                raise TypeError
+                raise ValueError
 
             author_id_list = self._get_author_ids_by_book(book_id)
 
@@ -320,7 +320,7 @@ class BooksDataSource:
 
         if search_text != None:
             if type(search_text) != str:
-                raise TypeError
+                raise ValueError
 
             def filter_search_text(author):
                 if search_text.lower() in (author['first_name'] + author['last_name']).lower():
@@ -333,7 +333,7 @@ class BooksDataSource:
 
         if start_year != None:
             if type(start_year) != int:
-                raise TypeError
+                raise ValueError
             if start_year > datetime.datetime.now().year:
                 return []
 
@@ -347,7 +347,7 @@ class BooksDataSource:
 
         if end_year != None:
             if type(end_year) != int:
-                raise TypeError
+                raise ValueError
 
             def filter_end_year(author):
                 if author['birth_year'] <= end_year:
