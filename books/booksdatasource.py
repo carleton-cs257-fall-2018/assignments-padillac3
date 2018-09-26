@@ -9,6 +9,7 @@
 
 import csv
 import sys
+import datetime
 from operator import itemgetter, attrgetter
 
 class BooksDataSource:
@@ -86,17 +87,19 @@ class BooksDataSource:
         self.authors_raw_data = self._load_authors(self.authors_filename)
         self.links_raw_data = self._load_links(self.books_authors_link_filename)
 
+
+
     def _create_csv_reader(self, filename):
         try:
             csvFile = open(filename, encoding="utf-8")
             file_reader = csv.reader(csvFile)
-            return file_reader
+            return file_reader, csvFile
         except IOError:
             sys.stderr.write("Error: file not found.")
             exit()
 
     def _load_books(self, filename):
-        file_reader = self._create_csv_reader(filename)
+        file_reader, csvFile = self._create_csv_reader(filename)
         dictionary = {}
         for row in file_reader:
             book_id = int(row[0])
@@ -104,11 +107,12 @@ class BooksDataSource:
             publication_year = int(row[2])
             dictionary[book_id] = {"id": book_id, "title": title, "publication_year": publication_year}
 
+        csvFile.close()
         return dictionary
 
 
     def _load_authors(self, filename):
-        file_reader = self._create_csv_reader(filename)
+        file_reader, csvFile = self._create_csv_reader(filename)
         dictionary = {}
         for row in file_reader:
             author_id = int(row[0])
@@ -121,16 +125,18 @@ class BooksDataSource:
                 death_year = int(row[4])
             dictionary[author_id] = {"id": author_id, "last_name": last_name, "first_name" : first_name, "birth_year": birth_year, "death_year": death_year}
 
+        csvFile.close()
         return dictionary
 
     def _load_links(self, filename):
-        file_reader = self._create_csv_reader(filename)
+        file_reader, csvFile = self._create_csv_reader(filename)
         link_list = []
         for row in file_reader:
             book_id = int(row[0])
             author_id = int(row[1])
             link_list.append((book_id, author_id))
 
+        csvFile.close()
         return link_list
 
 
@@ -144,7 +150,6 @@ class BooksDataSource:
 
 
     def _get_book_ids_by_author(self, author_id):
-        print(author_id)
         book_id_list = []
         for link in self.links_raw_data:
             if int(link[1]) == author_id:
@@ -192,30 +197,21 @@ class BooksDataSource:
         '''
         output_books_list = list(self.books_raw_data.values())
 
-        print("initial")
-        print(output_books_list)
 
         if author_id != None:
             if type(author_id) != int:
                 raise TypeError
 
             book_id_list = self._get_book_ids_by_author(author_id)
-            print(book_id_list)
 
             def filter_author_id(book):
-                print(book)
-                print(book['id'])
-                print(book_id_list)
                 if book['id'] in book_id_list:
-                    print("true")
                     return True
                 return False
 
             temp = output_books_list
             output_books_list = list(filter(filter_author_id, temp))
 
-        print("author_id")
-        print(output_books_list)
 
 
         if search_text != None:
@@ -230,9 +226,6 @@ class BooksDataSource:
             temp = output_books_list
             output_books_list = list(filter(filter_search_text, temp))
 
-        print("search_text")
-        print(output_books_list)
-
 
         if start_year != None:
             if type(start_year) != int:
@@ -246,9 +239,6 @@ class BooksDataSource:
             temp = output_books_list
             output_books_list = list(filter(filter_start_year, temp))
 
-        print("start_year")
-        print(output_books_list)
-
         if end_year != None:
             if type(end_year) != int:
                 raise TypeError
@@ -261,8 +251,6 @@ class BooksDataSource:
             temp = output_books_list
             output_books_list = list(filter(filter_end_year, temp))
 
-        print("end_year")
-        print(output_books_list)
 
         #Create and sort list of remaining books
         output_books_list = list(output_books_list)
@@ -273,8 +261,6 @@ class BooksDataSource:
         else: #sort by title
             output_books_list.sort(key = itemgetter('title', 'publication_year'))
 
-        print("sorted")
-        print(output_books_list)
 
         return output_books_list
 
@@ -350,6 +336,8 @@ class BooksDataSource:
         if start_year != None:
             if type(start_year) != int:
                 raise TypeError
+            if start_year > datetime.datetime.now().year:
+                return []
 
             def filter_start_year(author):
                 if author['death_year'] == None or author['death_year'] > start_year:
@@ -364,7 +352,7 @@ class BooksDataSource:
                 raise TypeError
 
             def filter_end_year(author):
-                if author['birth_year'] < end_year:
+                if author['birth_year'] <= end_year:
                     return True
                 return False
 
@@ -406,4 +394,5 @@ class BooksDataSource:
 if __name__ == '__main__':
     test = BooksDataSource("books.csv", "authors.csv", "books_authors.csv")
 
-    test.books(author_id=6)
+    print(test.authors().sort(key = itemgetter('last_name', 'first_name', 'birth_year')))
+    print(sorted(test.authors(), key = itemgetter('last_name')))

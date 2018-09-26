@@ -58,10 +58,10 @@ class BooksDataSourceTest(unittest.TestCase):
         self.assertEqual(self.data_source.books(end_year=1814), [{'id': 18, 'title': "Pride and Prejudice", 'publication_year': 1813}, {'id': 20, 'title': "Sense and Sensibility", 'publication_year': 1813}])
 
     def test_books_valid_sort_by_year(self):
-        self.assertEqual(self.data_source.books(sort_by='year'), self.data_source.books().sort(key=lambda book : book['publication_year']))
+        self.assertEqual(self.data_source.books(sort_by='year'), sorted(self.data_source.books(), key=lambda book : book['publication_year']))
 
     def test_books_valid_sort_by_title(self):
-        self.assertEqual(self.data_source.books(), self.data_source.books().sort(key=lambda book : book['title']))
+        self.assertEqual(self.data_source.books(), sorted(self.data_source.books(), key=lambda book : book['title']))
 
     def test_books_author_id_and_search_text(self):
         self.assertEqual(self.data_source.books(author_id=4, search_text="and"), [{'id': 18, 'title': "Pride and Prejudice", 'publication_year': 1813}, {'id': 20, 'title': "Sense and Sensibility", 'publication_year': 1813}])
@@ -120,11 +120,11 @@ class BooksDataSourceTest(unittest.TestCase):
         #Checks to make sure the list is 10 authors long
 
     def test_authors_valid_end_year(self):
-        self.assertEqual(len(self.data_source.authors(start_year=1820)), 7)
+        self.assertEqual(len(self.data_source.authors(end_year=1820)), 7)
         #Checks to make sure the list is 7 authors long
 
     def test_authors_valid_sort_by(self):
-        self.assertEqual(self.data_source.authors(sort_by='birth_year'), self.data_source.authors(sort_by="birth_year").sort(key=itemgetter('birth_year', 'last_name', 'first_name')))
+        self.assertEqual(self.data_source.authors(sort_by='birth_year'), sorted(self.data_source.authors(), key=itemgetter('birth_year', 'last_name', 'first_name')))
 
     def test_authors_book_id_and_search_text(self):
         self.assertEqual(self.data_source.authors(book_id=6, search_text="Neil"), [{'id': 5, 'last_name': "Gaiman", 'first_name': "Neil", 'birth_year': 1960, 'death_year': None}])
