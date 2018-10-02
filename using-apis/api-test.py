@@ -20,7 +20,7 @@ def get_countries():
         if type(name) != type(''):
             raise Exception('Name is wrong type: "{0}"'.format(name))
 
-        result_list.append({'name': name})
+        result_list.append(name)
 
     return result_list
 
@@ -29,11 +29,14 @@ def get_country_details(country):
 
     base_url = 'https://restcountries.eu/rest/v2/name/{0}/'
     url = base_url.format(country)
-    data_from_server = urllib.request.urlopen(url).read()
+    try:
+        data_from_server = urllib.request.urlopen(url).read()
+    except:
+        print("Invalid input", file=sys.stderr)
+        return {}
     string_from_server = data_from_server.decode('utf-8')
     country_list = json.loads(string_from_server)
 
-    result_list = []
     for country_dictionary in country_list:
         name = country_dictionary['name']
         capital = country_dictionary['capital']
@@ -49,15 +52,15 @@ def get_country_details(country):
             raise Exception('Region is wrong type: "{0}"'.format(region))
         if type(population) != type(0):
             raise Exception('Population is wrong type: "{0}"'.format(population))
-        if type(area) != type(0):
+        if type(area) != type(0.0):
             raise Exception('Area has wrong type: "{0}"'.format(area))
 
-        result_list.append({'name': name, 'capital': capital, 'region': region, 'population': population, 'area': area})
+        result = {'Name': name, 'Capital': capital, 'Region': region, 'Population': population, 'Area': area}
 
-    return result_list
+    return result
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) != 2:
         print("Usage: python3 api-test.py country_name")
         print("Use 'all' in place of country_name for all countries")
         exit()
@@ -68,9 +71,9 @@ def main():
             print(country)
     else:
         country_details = get_country_details(sys.argv[1])
-        print(country_details)
+        for key in country_details:
+            print(key + ": " + str(country_details[key]))
 
-    #elif sys.argv[1] ==
 
 
 
