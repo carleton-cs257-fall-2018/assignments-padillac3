@@ -5,6 +5,8 @@ types of food eaten, types of TV watched, distance traveled to get to a
 gathering, and region. Responses are from a 2015 SurveyMonkey poll of 1058 
 respondents. 
 
+URL: https://github.com/fivethirtyeight/data/blob/master/thanksgiving-2015/thanksgiving-2015-poll-data.csv
+
 User stories:
 
 - As a user of this API, I can select a food and find out which region of the US eats it the most on Thanksgiving.
