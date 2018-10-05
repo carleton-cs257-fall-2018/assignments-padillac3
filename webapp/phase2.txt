@@ -1,7 +1,21 @@
 Yasmeen Awad and Chris Padilla
 
-Description of dataset and url?
+Data on all aspects of indivuduals' Thanksgiving day traditions, including 
+types of food eaten, types of TV watched, distance traveled to get to a 
+gathering, and region. Responses are from a 2015 SurveyMonkey poll of 1058 
+respondents. 
 
 User stories:
 
+- As a user of this API, I can select a food and find out which region of the US eats it the most on Thanksgiving.
+
+- As a contemporary Minnesotan, I want to know what percentage of Minnesotans pray after their Thanksgiving meal. 
+
+- As someone who travels during the holidays, I want to know how many people travel long distances for Thanksgiving in my region so I can predict traffic.
+
+- As this year's host of Thanksgiving, I want to know what type of cranberry sauce people in my region typically make.
+
+- As a digital humanist, I want to get a sense for the quintessential American Thanksgiving meal.
+
+- As a pie enthusiast, I want to know how many Americans don't eat pie at Thanksgiving.
 
