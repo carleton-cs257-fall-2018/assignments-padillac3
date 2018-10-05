@@ -1,2 +1,7 @@
-# some stuff
+Yasmeen Awad and Chris Padilla
+
+Description of dataset and url?
+
+User stories:
+
 
