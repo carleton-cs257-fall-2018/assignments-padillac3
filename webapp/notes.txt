@@ -1,0 +1,7 @@
+Interest Data Options:
+main_dish, cranberry_sauce, side_dish, dessert, pie, retail, shop_black_friday, pray, age_cutoff, friendsgiving, travel
+
+Random Name Generator:
+randomapi.com/api
+randomapi.com
+randomuser.me
