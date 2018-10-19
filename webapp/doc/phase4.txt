@@ -88,6 +88,7 @@ CREATE TABLE dessert_other (
 CREATE TABLE demographics (
 
     id INT,
+    region ENUM('west north central', 'southeast', 'middle atlantic', 'east south central', 'mountain', 'east north central', 'new england', 'south atlantic', 'west south central')
     pray BOOLEAN,
     travel ENUM('home', 'local', 'near', 'far'),
     macys_parade BOOLEAN,
