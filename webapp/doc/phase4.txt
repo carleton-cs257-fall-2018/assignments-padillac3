@@ -8,51 +8,98 @@ Phase 4
 CREATE TABLE main_food (
 
     id INT,
-    main_dish TEXT,
-    cooked TEXT,
-    stuffing TEXT,
-    cranberry_sauce TEXT,
+    main_dish ENUM('turkey', 'tofurkey', 'ham/pork', 'turducken', 'roast beef', 'chicken', 'other'),
+    cooked ENUM('baked, roasted', 'roasted', 'other', 'fried', 'other'),
+    stuffing ENUM('bread-based', 'rice-based', 'none', 'other'),
+    cranberry_sauce ENUM('canned', 'homemade', 'none', 'other'),
     gravy BIT
+
+);
+
+CREATE TABLE main_dish_other (
+
+    id INT,
+    main_dish_other TEXT
+
+);
+
+
+CREATE TABLE cooked_other (
+
+    id INT,
+    cooked_other TEXT
+);
+
+CREATE TABLE stuffing_other(
+
+    id INT,
+    stuffing_other TEXT
+
+);
+
+CREATE TABLE cranberry_sauce_other (
+
+    id INT,
+    cranberry_sauce_other TEXT
 
 );
 
 CREATE TABLE side_dish (
 
     id INT,
-    dish TEXT
+    dish ENUM('brussel sprouts', 'carrots', 'cauliflower', 'corn', 'cornbread', 'fruit salad', 'green beans/green bean casserole', 'macaroni and cheese', 'mashed potatoes', 'rolls/biscuits', 'vegatable salad', 'yams/sweet potato casserole', 'other')
+
+);
+
+CREATE TABLE side_dish_other (
+
+    id INT,
+    side_dish_other TEXT
 
 );
 
 CREATE TABLE pie (
 
     id INT,
-    pie_type TEXT
+    pie_type ENUM('apple' 'buttermilk', 'cherry', 'chocolate', 'coconut cream', 'key lime', 'peach', 'pecan', 'pumpkin', 'sweet potato', 'none', 'other')
 
+);
+
+CREATE TABLE pie_other (
+
+    id INT,
+    pie_other TEXT
 );
 
 CREATE TABLE dessert (
 
     id INT,
-    dessert_type TEXT
+    dessert_type ENUM('apple cobbler', 'blondies', 'brownies', 'carrot cake', 'cheesecake', 'cookies', 'fudge', 'ice cream', 'peach cobbler', 'none', 'other')
 
+);
+
+CREATE TABLE dessert_other (
+
+    id INT,
+    dessert_other TEXT
 );
 
 
 CREATE TABLE demographics (
 
     id INT,
-    pray BIT,
-    travel TEXT,
-    macys_parade BIT,
+    pray BOOLEAN,
+    travel ENUM('home', 'local', 'near', 'far'),
+    macys_parade BOOLEAN,
     age_cutoff INT,
-    friendsgiving BIT,
-    black_friday_shop BIT,
-    work_retail BIT,
-    work_black_friday BIT,
-    population_density TEXT,
-    age TEXT,
-    gender TEXT,
-    income TEXT
+    friendsgiving BOOLEAN,
+    black_friday_shop BOOLEAN,
+    work_retail BOOLEAN,
+    work_black_friday BOOLEAN,
+    population_density ENUM('rural', 'suburban', 'urban'),
+    age ENUM('18-29', '30-44', '45-59', '60+'),
+    gender ENUM('Male', 'Female'),
+    income ENUM('0-9,999', '10,000-24,999', '25,000-49,999', '50,000-74,999', '75,000-99,999', '100,000-124,999', '125,000-149,999', '150,000-174,999', '175,000-199,999', '200,000+', 'prefer not to answer')
 
 );
 
