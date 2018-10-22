@@ -4,21 +4,25 @@ Chris Padilla and Yasmeen Awad
 Phase 4
 ------
 
+CREATE TYPE main AS ENUM('turkey', 'tofurkey', 'ham/pork', 'turducken', 'roast beef', 'chicken', 'other', E'i don\'t know');
+CREATE TYPE method AS ENUM('baked', 'roasted', 'fried', 'other', E'i don\'t know');
+CREATE TYPE stuff AS ENUM('bread-based', 'rice-based', 'none', 'other');
+CREATE TYPE sauce AS ENUM('canned', 'homemade', 'none', 'other');
 
 CREATE TABLE main_food (
 
-    id INT,
-    main_dish ENUM('turkey', 'tofurkey', 'ham/pork', 'turducken', 'roast beef', 'chicken', 'other'),
-    cooked ENUM('baked, roasted', 'roasted', 'other', 'fried', 'other'),
-    stuffing ENUM('bread-based', 'rice-based', 'none', 'other'),
-    cranberry_sauce ENUM('canned', 'homemade', 'none', 'other'),
-    gravy BIT
+    id BIGINT,
+    main_dish main,
+    cooked method,
+    stuffing stuff,
+    cranberry_sauce sauce,
+    gravy BOOLEAN
 
 );
 
 CREATE TABLE main_dish_other (
 
-    id INT,
+    id BIGINT,
     main_dish_other TEXT
 
 );
@@ -26,81 +30,97 @@ CREATE TABLE main_dish_other (
 
 CREATE TABLE cooked_other (
 
-    id INT,
+    id BIGINT,
     cooked_other TEXT
 );
 
 CREATE TABLE stuffing_other(
 
-    id INT,
+    id BIGINT,
     stuffing_other TEXT
 
 );
 
 CREATE TABLE cranberry_sauce_other (
 
-    id INT,
+    id BIGINT,
     cranberry_sauce_other TEXT
 
 );
 
+CREATE TYPE dish AS ENUM('brussel sprouts', 'carrots', 'cauliflower', 'corn', 'cornbread', 'fruit salad', 'green beans/green bean casserole', 'macaroni and cheese', 'mashed potatoes', 'rolls/biscuits', 'vegetable salad', 'yams/sweet potato casserole', 'squash', 'other');
+
 CREATE TABLE side_dish (
 
-    id INT,
-    dish ENUM('brussel sprouts', 'carrots', 'cauliflower', 'corn', 'cornbread', 'fruit salad', 'green beans/green bean casserole', 'macaroni and cheese', 'mashed potatoes', 'rolls/biscuits', 'vegatable salad', 'yams/sweet potato casserole', 'other')
+    id BIGINT,
+    side dish
 
 );
 
 CREATE TABLE side_dish_other (
 
-    id INT,
+    id BIGINT,
     side_dish_other TEXT
 
 );
 
+CREATE TYPE flavor AS ENUM('apple', 'buttermilk', 'cherry', 'chocolate', 'coconut cream', 'key lime', 'peach', 'pecan', 'pumpkin', 'sweet potato', 'none', 'other');
+
 CREATE TABLE pie (
 
-    id INT,
-    pie_type ENUM('apple' 'buttermilk', 'cherry', 'chocolate', 'coconut cream', 'key lime', 'peach', 'pecan', 'pumpkin', 'sweet potato', 'none', 'other')
+    id BIGINT,
+    pie_type flavor
 
 );
 
 CREATE TABLE pie_other (
 
-    id INT,
+    id BIGINT,
     pie_other TEXT
 );
 
+
+CREATE TYPE sweet AS ENUM('apple cobbler', 'blondies', 'brownies', 'carrot cake', 'cheesecake', 'cookies', 'fudge', 'ice cream', 'peach cobbler', 'none', 'other');
+
+
 CREATE TABLE dessert (
 
-    id INT,
-    dessert_type ENUM('apple cobbler', 'blondies', 'brownies', 'carrot cake', 'cheesecake', 'cookies', 'fudge', 'ice cream', 'peach cobbler', 'none', 'other')
+    id BIGINT,
+    dessert_type sweet
 
 );
 
 CREATE TABLE dessert_other (
 
-    id INT,
+    id BIGINT,
     dessert_other TEXT
 );
+
+CREATE TYPE place AS ENUM('west north central', 'southeast', 'middle atlantic', 'east south central', 'mountain', 'east north central', 'new england', 'south atlantic', 'west south central', 'pacific', '');
+CREATE TYPE dist AS ENUM('home', 'local', 'near', 'far', '');
+CREATE TYPE density AS ENUM('rural', 'suburban', 'urban', '');
+CREATE TYPE agegroup AS ENUM('18 - 29', '30 - 44', '45 - 59', '60+', '');
+CREATE TYPE sex AS ENUM('male', 'female', '');
+CREATE TYPE wealth AS ENUM('"$0 to $9,999"', '"$10,000 to $24,999"', '"$25,000 to $49,999"', '"$50,000 to $74,999"', '"$75,000 to $99,999"', '"$100,000 to $124,999"', '"$125,000 to $149,999"', '"$150,000 to $174,999"', '"$175,000 to $199,999"', '"$200,000 and up"', 'prefer not to answer', '');
+
 
 
 CREATE TABLE demographics (
 
-    id INT,
-    region ENUM('west north central', 'southeast', 'middle atlantic', 'east south central', 'mountain', 'east north central', 'new england', 'south atlantic', 'west south central')
+    id BIGINT,
+    region place,
     pray BOOLEAN,
-    travel ENUM('home', 'local', 'near', 'far'),
+    travel dist,
     macys_parade BOOLEAN,
     age_cutoff INT,
     friendsgiving BOOLEAN,
     black_friday_shop BOOLEAN,
     work_retail BOOLEAN,
     work_black_friday BOOLEAN,
-    population_density ENUM('rural', 'suburban', 'urban'),
-    age ENUM('18-29', '30-44', '45-59', '60+'),
-    gender ENUM('Male', 'Female'),
-    income ENUM('0-9,999', '10,000-24,999', '25,000-49,999', '50,000-74,999', '75,000-99,999', '100,000-124,999', '125,000-149,999', '150,000-174,999', '175,000-199,999', '200,000+', 'prefer not to answer')
+    population_density density,
+    age agegroup,
+    gender sex,
+    income TEXT
 
 );
 
