@@ -34,6 +34,7 @@ def hello():
 def get_stats():
     data = []
 
+    #TODO MAKE SURE '/' CHARACTERS DO NOT END UP IN ARGS WHEN ARGS ARE AT THE END OF THE URL
     demographic = flask.request.args.get('demographic')
     interest = flask.request.args.get('interest')
 
@@ -50,7 +51,7 @@ def get_stats():
 
 
     try:
-        query = "SELECT {1}, {0}, COUNT({0}) FROM {2} demographics GROUP BY {0}, {1}".format(interest, demographic, table_name)
+        query = "SELECT  DISTINCT {1}, {0}, COUNT({0}) FROM {2} demographics WHERE {table_name_no_comma}.id = demographics.id GROUP BY {0}, {1}".format(interest, demographic, table_name, table_name_no_comma=table_name[:-1])
 
         cursor = connection.cursor()
         cursor.execute(query)
@@ -101,6 +102,8 @@ def get_random():
     random_respondent.append(side_data)
     random_respondent.append(pie_data)
     random_respondent.append(dessert_data)
+
+    #TODO GET RANDOM NAME FROM RANDOM API
 
     #TODO MAKE DICTIONARY HERE WITH random_respondent RESULTS
 
