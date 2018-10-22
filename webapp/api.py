@@ -11,6 +11,7 @@ import flask
 import json
 import psycopg2
 import random
+import requests
 
 app = flask.Flask(__name__)
 
@@ -30,28 +31,33 @@ def hello():
     return 'Hello, Citizen of CS257.'
 
 
-@app.route('/map')
+@app.route('/map/')
 def get_stats():
     data = []
 
     #TODO MAKE SURE '/' CHARACTERS DO NOT END UP IN ARGS WHEN ARGS ARE AT THE END OF THE URL
+    #TODO check incoming arguments against a list of acceptable arguments
     demographic = flask.request.args.get('demographic')
     interest = flask.request.args.get('interest')
 
+
     if interest =='pie_type':
-        table_name = 'pie,'
+        table_name = 'pie'
     elif interest == 'dessert_type':
-        table_name = 'dessert,'
+        table_name = 'dessert'
     elif interest == 'side':
-        table_name = 'side_dish,'
+        table_name = 'side_dish'
     elif interest in ('main_dish', 'cranberry_sauce', 'cooked', 'gravy', 'stuffing'):
-        table_name = 'main_food,'
+        table_name = 'main_food'
     else:
         table_name = ''
 
 
     try:
-        query = "SELECT  DISTINCT {1}, {0}, COUNT({0}) FROM {2} demographics WHERE {table_name_no_comma}.id = demographics.id GROUP BY {0}, {1}".format(interest, demographic, table_name, table_name_no_comma=table_name[:-1])
+        if table_name == '':
+            query = "SELECT  DISTINCT {1}, {0}, COUNT({0}) FROM demographics GROUP BY {0}, {1}".format(interest, demographic, table_name)
+        else:
+            query = "SELECT  DISTINCT {1}, {0}, COUNT({0}) FROM {2}, demographics WHERE {2}.id = demographics.id GROUP BY {0}, {1}".format(interest, demographic, table_name)
 
         cursor = connection.cursor()
         cursor.execute(query)
@@ -66,7 +72,7 @@ def get_stats():
 
 
 
-@app.route('/random')
+@app.route('/random/')
 def get_random():
     random_respondent = []
 
@@ -103,7 +109,12 @@ def get_random():
     random_respondent.append(pie_data)
     random_respondent.append(dessert_data)
 
-    #TODO GET RANDOM NAME FROM RANDOM API
+    r = requests.get("https://randomapi.com/api/6de6abfedb24f889e0b5f675edc50deb?fmt=raw&sole")
+    random_first_name = r.json()[0]['first']
+    random_last_name = r.json()[0]['last']
+
+    random_respondent.append(random_first_name)
+    random_respondent.append(random_last_name)
 
     #TODO MAKE DICTIONARY HERE WITH random_respondent RESULTS
 
