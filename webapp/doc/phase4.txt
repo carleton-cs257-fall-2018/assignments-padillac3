@@ -136,7 +136,7 @@ demographic to the interest data about the demographic, which is a dictionary.
 Each interest data dictionary maps the categories to percentages of the
 demographic that fit the category.
 
-EXAMPLE: http://perlman.mathcs.carleton.edu/home?demographic=region&interest=main_dish/
+EXAMPLE: http://perlman.mathcs.carleton.edu/map?demographic=region&interest=main_dish/
 
 {'Pacific': {'turkey': .90, 'ham': .05, 'tofurkey': .03, 'pork': .01, 'other': .01},
 'West North Central': {'turkey': .89, 'ham': .06, 'tofurkey': 0, 'pork': .03, 'other': .03},
