@@ -36,9 +36,18 @@ def get_stats():
     data = []
 
     #TODO MAKE SURE '/' CHARACTERS DO NOT END UP IN ARGS WHEN ARGS ARE AT THE END OF THE URL
-    #TODO check incoming arguments against a list of acceptable arguments
+
     demographic = flask.request.args.get('demographic')
     interest = flask.request.args.get('interest')
+
+    # Check for valid keyword arguments
+    if demographic not in ['region', 'population_density', 'age', 'gender']:
+        return '404 error: bad demographic argument'
+
+    if interest not in ['main_dish', 'cooked', 'stuffing', 'cranberry_sauce', 'gravy',
+                'side', 'pie_type', 'dessert_type', 'pray', 'travel', 'macys_parade',
+                'age_cutoff', 'friendsgiving', 'black_friday_shop', 'work_retail', 'work_black_friday']:
+        return '404 error: bad interest argument'
 
 
     if interest =='pie_type':
