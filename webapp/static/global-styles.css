@@ -1,28 +1,60 @@
 /*Global style sheet for Thanksgiving website*/
 
 :root {
+  --brown: #3a260b;
   --maroon: #6e352c;
   --scarlet: #cf5230;
   --orange: #f59a44;
   --beige: #e3c598;
   --taupe: #8a6e64;
+  font-family: Verdana, Geneva, sans-sans-serif;
 }
 
-
-
-header {
-  width: 100%;
-  background-color: var(--beige);
-  padding: 5px 2px
-}
-
-.heading {
-  color: black;
-}
 
 body {
   background-image: url(background-image.jpg);
 }
+
+
+header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--beige);
+  border: 3px solid var(--maroon);
+}
+
+h1 {
+  color: var(--brown);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#nav-buttons {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+}
+
+.navigation {
+  background-color: var(--beige);
+  font-weight: bolder;
+  border: none;
+  border-left: .5px groove var(--taupe);
+  height: 100%;
+}
+
+hr {
+  padding: 10px;
+  border: none;
+}
+
+#demographic-button-group {
+  float: left;
+  width: 23%;
+}
+
 
 .demographic-button {
   background-color: var(--beige);
@@ -32,7 +64,9 @@ body {
   border: 2px solid var(--maroon);
   border-radius: 2px;
   display:block;
-  padding: 16px 50px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  width: 100%;
 }
 
 .demographic-button:hover {
