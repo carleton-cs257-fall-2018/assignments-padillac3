@@ -1,7 +1,37 @@
 /*Global style sheet for Thanksgiving website*/
 
+:root {
+  --maroon: #6e352c;
+  --scarlet: #cf5230;
+  --orange: #f59a44;
+  --beige: #e3c598;
+  --taupe: #8a6e64;
+}
 
+.heading {
+  color: var(--taupe);
+}
 
-h1 {
-  color: red;
+body {
+  background-image: url(background-image.jpg);
+}
+
+.demographic-button {
+  background-color: var(--beige);
+  color:black;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  border: 2px solid var(--maroon);
+  border-radius: 2px;
+  display:block;
+  padding: 16px 50px;
+}
+
+.demographic-button:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+.arrow {
+
 }
