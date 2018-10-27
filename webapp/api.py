@@ -41,7 +41,7 @@ def get_stats():
     interest = flask.request.args.get('interest')
 
     # Check for valid keyword arguments
-    if demographic not in ['region', 'population_density', 'age', 'gender']:
+    if demographic not in ['region', 'population_density', 'age', 'gender', 'income']:
         return '404 error: bad demographic argument'
 
     if interest not in ['main_dish', 'cooked', 'stuffing', 'cranberry_sauce', 'gravy',
@@ -127,7 +127,47 @@ def get_random():
 
     #TODO MAKE DICTIONARY HERE WITH random_respondent RESULTS
 
-    return json.dumps(random_respondent)
+    id = random_respondent[0][0]
+    main_dish = random_respondent[0][1]
+    cranberry_sauce = random_respondent[0][2]
+    cooked = random_respondent[0][3]
+    stuffing = random_respondent[0][4]
+    pray = random_respondent[0][5]
+    region = random_respondent[0][6]
+    income = random_respondent[0][7]
+    travel = random_respondent[0][8]
+    black_friday_shop = random_respondent[0][9]
+    work_retail = random_respondent[0][10]
+    work_black_friday = random_respondent[0][11]
+    gravy = random_respondent[0][12]
+    population_density = random_respondent[0][13]
+    gender = random_respondent[0][14]
+    age = random_respondent[0][15]
+    friendsgiving = random_respondent[0][16]
+    age_cutoff = random_respondent[0][17]
+
+    side_list = random_respondent[1]
+    side = []
+    for option in side_list:
+        side.append(option)
+
+    pie_list = random_respondent[2]
+    pie = []
+    for type in pie_list:
+        pie.append(type)
+
+    first_name = random_respondent[3]
+    last_name = random_respondent[4]
+
+    random_response = {'id': id, 'main_dish': main_dish, 'cranberry_sauce': cranberry_sauce,
+            'cooked': cooked, 'stuffing': stuffing, 'pray': pray, 'region': region, 'income': income,
+            'travel': travel, 'black_friday_shop': black_friday_shop, 'work_retail': work_retail,
+            'work_black_friday': work_black_friday, 'gravy': gravy,
+            'population_density': population_density, 'gender': gender, 'age': age,
+            'friendsgiving': friendsgiving, 'age_cutoff': age_cutoff, 'side': side, 'pie': pie,
+            'first_name': first_name, 'last_name': last_name}
+
+    return json.dumps(random_response)
 
 
 
