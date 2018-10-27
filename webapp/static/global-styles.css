@@ -8,8 +8,16 @@
   --taupe: #8a6e64;
 }
 
+
+
+header {
+  width: 100%;
+  background-color: var(--beige);
+  padding: 5px 2px
+}
+
 .heading {
-  color: var(--taupe);
+  color: black;
 }
 
 body {
