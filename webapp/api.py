@@ -149,15 +149,20 @@ def get_random():
     side_list = random_respondent[1]
     side = []
     for option in side_list:
-        side.append(option)
+        side.append(option[0])
 
     pie_list = random_respondent[2]
     pie = []
-    for type in pie_list:
-        pie.append(type)
+    for pie_type in pie_list:
+        pie.append(pie_type[0])
 
-    first_name = random_respondent[3]
-    last_name = random_respondent[4]
+    dessert_list = random_respondent[3]
+    dessert = []
+    for dessert_type in dessert_list:
+        dessert.append(dessert_type[0])
+
+    first_name = random_respondent[4]
+    last_name = random_respondent[5]
 
     random_response = {'id': id, 'main_dish': main_dish, 'cranberry_sauce': cranberry_sauce,
             'cooked': cooked, 'stuffing': stuffing, 'pray': pray, 'region': region, 'income': income,
