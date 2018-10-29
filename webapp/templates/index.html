@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Thanksgiving</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" href="../static/global-styles.css">
 		<script>var api_port = {{api_port}}</script>
 		<script type="text/javascript" src="../static/general-script.js" defer></script>
@@ -12,7 +13,7 @@
 		<header>
 			<h1>Thanksgivings Across the US</h1>
 
-			<div id="nav-buttons">
+			<div id="nav-button-group">
 				<button class="navigation">about</button>
 				<button class="navigation">sources</button>
 			</div>
@@ -47,10 +48,17 @@
 				<area id="pacific" shape="rect" coords="40,55,130,320">
 			</map>
 
+			<div id="interest-button-block">
+				<button id="interest-left"><i class="fas fa-angle-left"></i></button>
+				<button id="selected-interest-button">TEST</button>
+				<button id="interest-right"><i class="fas fa-angle-right"></i></button>
+
+			</div>
+
+
 		</div>
 
-
-		<ul id="interest-button-group">
+		<ul id="interest-button-list">
 			<li>Main Dish</li>
 			<li>Cooking Method</li>
 			<li>Stuffing</li>
@@ -62,9 +70,11 @@
 			<li>Prayer</li>
 			<li>Travel</li>
 			<li>Macy's Parade</li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>Age of Kid's Table</li>
+			<li>Friendsgiving</li>
+			<li>Shop Black Friday</li>
+			<li>Work in Retail</li>
+			<li>Work Black Friday</li>
 		</ul>
 
 

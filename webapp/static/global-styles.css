@@ -31,7 +31,7 @@ h1 {
   padding-right: 10px;
 }
 
-#nav-buttons {
+#nav-button-group {
   display: flex;
   flex-direction: row;
   height: auto;
@@ -67,6 +67,7 @@ hr {
   padding-top: 18px;
   padding-bottom: 18px;
   width: 90%;
+  font-size: 18px
 }
 
 .demographic-button:hover {
@@ -81,4 +82,45 @@ hr {
 
 #region-image {
   padding: 10px 20px;
+}
+
+#interest-button-block {
+  display: grid;
+  grid-template-columns: 1fr 80px minmax(200px,500px) 80px 1fr;
+}
+
+#interest-button-block > * {
+  background-color: transparent;
+  outline: none;
+  font-size: 24px;
+  border: none;
+  transition-duration: .4s;
+}
+
+#interest-button-block > #interest-left {
+  grid-column: 2/-4;
+}
+
+#interest-left:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+#interest-button-block > #selected-interest-button {
+  grid-column: 3/-3;
+  border-left: 2px solid var(--maroon);
+  border-right: 2px solid var(--maroon);
+}
+
+#interest-button-block > #interest-right {
+  grid-column: 4/-2;
+}
+
+#interest-right:hover {
+  background-color: var(--maroon);
+  color: white;
+}
+
+#interest-button-list {
+  visibility: hidden;
 }
