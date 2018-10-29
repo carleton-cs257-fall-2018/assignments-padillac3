@@ -52,7 +52,7 @@ hr {
 
 #demographic-button-group {
   float: left;
-  width: 23%;
+  width: 26%;
 }
 
 
@@ -66,7 +66,7 @@ hr {
   display:block;
   padding-top: 18px;
   padding-bottom: 18px;
-  width: 100%;
+  width: 90%;
 }
 
 .demographic-button:hover {
@@ -74,6 +74,11 @@ hr {
   color: white;
 }
 
-.arrow {
+#main-content {
+  float: left;
+  background-color: var(--beige);
+}
 
+#map-image {
+  padding: 10px 20px;
 }
