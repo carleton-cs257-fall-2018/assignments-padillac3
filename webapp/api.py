@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 '''
-    example_flask_app.py
-    Jeff Ondich, 22 April 2016
+    api.py
+    Chris Padilla and Yasmeen Awad
 
-    A slightly more complicated Flask sample app than the
-    "hello world" app found at http://flask.pocoo.org/.
 '''
 import sys
 import flask
@@ -13,7 +11,7 @@ import psycopg2
 import random
 import requests
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 database = "padillac3"
 user = "padillac3"
@@ -25,6 +23,11 @@ except Exception as e:
     print(e)
     exit()
 
+
+@app.after_request
+def set_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 @app.route('/')
 def hello():
