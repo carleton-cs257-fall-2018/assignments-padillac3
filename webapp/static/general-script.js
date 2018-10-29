@@ -10,20 +10,20 @@ function getBaseURL() {
 //Initialize demographics buttons
 
 //Initialize map
-function display_map(interest) {
+function display_map(interest = 'side') {
   var url = getBaseURL() + '/map?' + 'demographic=region&interest=' + interest;
 }
 document.getElementById('map').onclick = display_map;
 
 //Initialize other demographics
-function display_graph(interest, demographic) {
+function display_graph(interest = 'side', demographic = 'age') {
   var url = getBaseURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
   fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
 
 }
-document.getElementById('age').onclick = display_graph;
-document.getElementById('gender').onclick = display_graph;
-document.getElementById('population_density').onclick = display_graph;
+document.getElementById('age').onclick = display_graph(demographic = 'age');
+document.getElementById('gender').onclick = display_graph(demographic = 'gender');
+document.getElementById('population_density').onclick = display_graph(demographic = 'population_density');
 
 
 

@@ -16,7 +16,9 @@ def get_main_page():
 @app.route('/random')
 def random():
     global api_port
-    return flask.render_template('', api_port=api_port)
+
+    # TODO figure out if we need a different html file for this page
+    return flask.render_template('index.html', api_port=api_port)
 
 
 @app.route('/map')
