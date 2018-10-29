@@ -31,7 +31,7 @@ def hello():
     return 'Hello, Citizen of CS257.'
 
 
-@app.route('/map/')
+@app.route('/map')
 def get_stats():
     data = []
 
