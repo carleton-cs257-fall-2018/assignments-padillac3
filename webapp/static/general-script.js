@@ -32,6 +32,6 @@ document.getElementById('population_density').onclick = display_graph(demographi
 function random() {
   var url = getBaseURL() + '/random/';
   alert(url);
-  fetch(url, {method: 'get'}).then((response) => response.json()).then(alert(response));
+  document.location.href = url;
 }
 document.getElementById('random').onclick = random;
