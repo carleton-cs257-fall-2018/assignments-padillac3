@@ -21,7 +21,7 @@ function display({interest = 'side', demographic = current_demographic}) {
   current_demographic = demographic;
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
   alert(url);
-  raw_data = fetch (url, {method: 'get'}).then(function(response){return response.json();});
+  fetch (url, {method: 'get'}).then(raw_data = function(response){return response.json();}).then(alert(raw_data));
   alert(raw_data);
 }
 
