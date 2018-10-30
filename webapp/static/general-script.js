@@ -67,9 +67,6 @@ function display({interest = 'side', demographic = current_demographic}) {
       }
 
 
-      //{'pacific': [{values: [], labels: [], type: 'pie'}] }
-
-
     } else { //Other demographic choice
       alert("other demographic");
 
@@ -148,7 +145,8 @@ function display({interest = 'side', demographic = current_demographic}) {
 
 
 // Left hand side buttons
-document.getElementById('map').onclick = function() {display({demographic: 'region'})};
+document.getElementsByTagName('body')[0].onload = function() {display({demographic: 'region'})};
+document.getElementById('map').onclick = function() {var url = getBaseWebURL(); document.location.href = url};
 document.getElementById('age').onclick = function() {display({demographic: 'age'})};
 document.getElementById('gender').onclick = function() {display({demographic: 'gender'})};
 document.getElementById('population_density').onclick = function() {display({demographic: 'population_density'})};
