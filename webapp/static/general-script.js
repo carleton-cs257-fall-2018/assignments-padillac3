@@ -20,10 +20,45 @@ var current_demographic = 'region'
 function display({interest = 'side', demographic = current_demographic}) {
   current_demographic = demographic;
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
-  alert(url);
-  //fetch (url, {method: 'get'}).then(function(response){return response.json();}).then(alert(raw_data));
-  //alert(raw_data);
-  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){alert(raw_data);})
+
+  function parse_data(raw_data) {
+    if (current_demographic == 'region') { //Demographic == region
+      alert("Region data!");
+
+      var formatted_data = {};
+      var done_regions = [];
+
+      for (var tuple in raw_data) {
+        if (tuple[0] in done_regions) {
+          formatted_data[tuple[0]][labels].push(tuple[1]);
+          formatted_data[tuple[0]][values].push(tuple[2]);
+        } else {
+          formatted_data[tuple[0]] = [{values: [], labels: [], type: 'pie'}];
+          formatted_data[tuple[0]][labels].push(tuple[1]);
+          formatted_data[tuple[0]][values].push(tuple[2]);
+        }
+      }
+
+      alert(formatted_data);
+
+
+      //{'pacific': [{values: [], labels: [], type: 'pie'}] }
+
+
+    } else { //Other demographic choice
+      alert("other demographic");
+      var done_interest = [];
+      for (var tuple in raw_data) {
+        if (tuple[1] in done_interest) {
+          //ADD TO EXISTING TRACE
+        } else {
+          //CREATE NEW TRACE AND ADD DATA TO IT
+        }
+      }
+    }
+  }
+
+  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){alert(raw_data);parse_data(raw_data);})
 }
 
 // Left hand side buttons
@@ -41,7 +76,6 @@ function getInterest(direction) {
   //RETURN INNERHTML OF NEW LIST ITEM
 }
 
-//MAYBE GET RID OF THIS SCRIPT IF RANDOM IS MEANT TO LINK TO DIFFERENT HTML PAGE?
 //Initialize random
 function random() {
   var url = getBaseWebURL() + '/random';
