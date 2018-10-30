@@ -23,7 +23,6 @@ function display({interest = 'side', demographic = current_demographic}) {
 
   function parse_data(raw_data) {
     if (current_demographic == 'region') { //Demographic == region
-      alert("Region data!");
 
       var formatted_data = {};
       var done_regions = [];
@@ -40,12 +39,22 @@ function display({interest = 'side', demographic = current_demographic}) {
         }
       }
 
-      alert("DONE PARSING: " + formatted_data);
 
-      alert(JSON.stringify(formatted_data));
 
-      document.getElementById('PLOTLYTEST').INNERHTML = formatted_data;
-
+      var layout = {
+        autosize: false,
+        width: 300,
+        height: 300,
+        margin: {
+          l: 10,
+          r: 10,
+          b: 10,
+          t: 10,
+          pad: 2
+        },
+        paper_bgcolor: '#7f7f7f',
+        plot_bgcolor: '#c7c7c7'
+      };
 
       for (key in formatted_data) {
         if (key != 'null') {
@@ -70,7 +79,7 @@ function display({interest = 'side', demographic = current_demographic}) {
     }
   }
 
-  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){alert(raw_data);parse_data(raw_data);})
+  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){parse_data(raw_data);})
 }
 
 // Left hand side buttons
