@@ -24,17 +24,15 @@ function display({interest = 'side', demographic = current_demographic}) {
   //fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
 }
 
-//TODO: CHANGE ALL ONCLICKS TO NOT ACTUALLY CALL THE FUNCTION (parentheses) --CALL A NAMELESS FUNCTION INSTEAD WHICH UPDATES current_demographic AND THEN CALLS THE DISPLAY FUNCTION?
-
 // Left hand side buttons
-document.getElementById('map').onclick = function() {display({demographic: 'map'})};
-document.getElementById('age').onclick = display({demographic: 'age'});
-document.getElementById('gender').onclick = display({demographic: 'gender'});
-document.getElementById('population_density').onclick = display({demographic: 'population_density'});
+document.getElementById('map').onclick = function() {display({demographic: 'region'})};
+document.getElementById('age').onclick = function() {display({demographic: 'age'})};
+document.getElementById('gender').onclick = function() {display({demographic: 'gender'})};
+document.getElementById('population_density').onclick = function() {display({demographic: 'population_density'})};
 
 // Arrow buttons
-document.getElementById('right_arrow').onclick = display({interest: getInterest('right')});
-document.getElementById('left_arrow').onclick = display({interest: getInterest('left')});
+document.getElementById('right_arrow').onclick = function() {display({interest: getInterest('right')})};
+document.getElementById('left_arrow').onclick = function() {display({interest: getInterest('left')})};
 
 function getInterest(direction) {
   // TODO cycle through interests to return the next
