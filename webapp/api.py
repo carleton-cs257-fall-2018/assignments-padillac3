@@ -126,19 +126,49 @@ def get_random():
     random_respondent.append(random_last_name)
 
     id = random_respondent[0][0]
+
     main_dish = random_respondent[0][1]
+    if main_dish in ["", "null"]:
+        main_dish = "nothing"
+
     cranberry_sauce = random_respondent[0][2]
+    if cranberry_sauce in ["", "null", "none", "other"]:
+        cranberry_sauce = "no"
+
     cooked = random_respondent[0][3]
+    if cooked in ["", "null", "none", "other"]:
+        cooked = ""
     stuffing = random_respondent[0][4]
+
     pray = random_respondent[0][5]
+    if pray = "true":
+        pray = "praying"
+    else:
+        pray = "washing their hands"
+
     region = random_respondent[0][6]
+    if region in ["", "null"]:
+        region = ""
+
     income = random_respondent[0][7]
+    if income in ["", "null", "prefer not to answer"]:
+        income = "an undisclosed income"
+
     travel = random_respondent[0][8]
     black_friday_shop = random_respondent[0][9]
     work_retail = random_respondent[0][10]
     work_black_friday = random_respondent[0][11]
+
     gravy = random_respondent[0][12]
+    if gravy = "true":
+        gravy = " with gravy"
+    else:
+        gravy = ""
+
     population_density = random_respondent[0][13]
+    if population_density in ["", "null"]:
+        population_density = "populated"
+
     gender = random_respondent[0][14]
     age = random_respondent[0][15]
     friendsgiving = random_respondent[0][16]
@@ -162,19 +192,19 @@ def get_random():
     first_name = random_respondent[4]
     last_name = random_respondent[5]
 
-    full = {'id': id, 'main_dish': main_dish, 'cranberry_sauce': cranberry_sauce,
-            'cooked': cooked, 'stuffing': stuffing, 'pray': pray, 'region': region, 'income': income,
-            'travel': travel, 'black_friday_shop': black_friday_shop, 'work_retail': work_retail,
-            'work_black_friday': work_black_friday, 'gravy': gravy,
-            'population_density': population_density, 'gender': gender, 'age': age,
-            'friendsgiving': friendsgiving, 'age_cutoff': age_cutoff, 'side': side, 'pie': pie,
-            'first_name': first_name, 'last_name': last_name}
+
 
     story = ("Hello, and welcome to " + first_name + " " + last_name +
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
-    " who eats " + cooked + " " + main_dish + " on Thankgiving. " + first_name + "swears by the tradition of "
-    + cranberry_sauce + " cranberry sauce. Only the best for " + first_name + "! " + first_name +
-    " lives in a " + population_density + " area and their household makes around " + income + " annually.")
+    " who eats " + cooked + " " + main_dish + gravy + " on Thankgiving. At "
+    + first_name + "'s Thanksgiving, everyone younger than" + str(age_cutoff)
+    + " must sit at the kid's table. " + first_name + " swears by the tradition of "
+    + cranberry_sauce + " cranberry sauce. Only the best for " + first_name +
+    "! After " + pray + ", " + first_name + " devours their " + side[0] +
+    " and then their " + dessert[0] + ". Even though they're sufficiently stuffed at this point, "
+    + first_name + " always has room for the best Thanksgiving tradition of all: "
+    + pie[0] + " pie!" + first_name + " lives in a " + population_density +
+    " area in the " + region + " US, and their household makes " + income + " annually.")
 
     return json.dumps(story)
 

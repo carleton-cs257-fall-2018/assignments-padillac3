@@ -1,3 +1,8 @@
+/*
+random-script.js
+Yasmeen Awad and Chris Padilla
+*/
+
 
 function getBaseAPIURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
@@ -9,15 +14,12 @@ function getBaseWebURL() {
   return baseURL;
 }
 
+// Main display function
 function display_story() {
   var url = getBaseAPIURL() + "/random";
   fetch(url, {method: 'get'}).then((response) => response.json()).then(function(story) {
-    var text_location = document.getElementById('story');
-    if (text_location) {
-      text_location.innerHTML = story;
-    }
+    document.getElementById('story').innerHTML = story;
   });
-
 }
 
 //Initialize home page button
