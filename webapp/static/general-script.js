@@ -44,8 +44,8 @@ function display({interest = 'side', demographic = current_demographic}) {
       var layout = {
         showlegend: false,
         autosize: false,
-        width: 270,
-        height: 270,
+        width: 250,
+        height: 250,
         margin: {
           l: 5,
           r: 5,
@@ -57,7 +57,7 @@ function display({interest = 'side', demographic = current_demographic}) {
 
       for (key in formatted_data) {
         if (key != 'null') {
-          Plotly.newPlot(key, formatted_data[key], layout);
+          Plotly.newPlot((key + ' plotly'), formatted_data[key], layout);
         }
       }
 
@@ -78,8 +78,25 @@ function display({interest = 'side', demographic = current_demographic}) {
     }
   }
 
-  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){parse_data(raw_data);})
+
+  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){parse_data(raw_data);});
+
+  alert("A");
+  var region_bit_maps = document.getElementById('region-image-map').children;
+  alert("B");
+  for (var i = 0; i < region_bit_maps; i++) {
+    alert("loop");
+    region_bit_maps[i].onmouseover = function() {
+      plotlydiv = document.getElementById((region_bit_maps[i].id + ' plotly'));
+      plotlydiv.style.visibility = 'visible';
+      plotlydiv.style.top = 50%;
+      plotlydiv.style.left = 50%;
+    };
+  }
+  alert("C");
+
 }
+
 
 // Left hand side buttons
 document.getElementById('map').onclick = function() {display({demographic: 'region'})};
