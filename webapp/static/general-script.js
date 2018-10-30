@@ -30,7 +30,7 @@ function display({interest = 'side', demographic = current_demographic}) {
 
       alert(raw_data);
       for (let tuple of raw_data) {
-        alert(tuple);
+        alert("TUPLE: " + tuple);
         if (tuple[0] in done_regions) {
           formatted_data[tuple[0]][0].labels.push(tuple[1]);
           formatted_data[tuple[0]][0].values.push(tuple[2]);
@@ -40,6 +40,7 @@ function display({interest = 'side', demographic = current_demographic}) {
           formatted_data[tuple[0]][0].values.push(tuple[2]);
           done_regions.push(tuple[0]);
         }
+        alert("DATA: " + formatted_data);
       }
 
       alert(formatted_data);
