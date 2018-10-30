@@ -160,7 +160,7 @@ def get_random():
     work_black_friday = random_respondent[0][11]
 
     gravy = random_respondent[0][12]
-    if gravy = "true":
+    if gravy == "true":
         gravy = " with gravy"
     else:
         gravy = ""
