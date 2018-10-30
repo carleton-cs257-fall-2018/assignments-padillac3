@@ -90,8 +90,8 @@ function display({interest = 'side', demographic = current_demographic}) {
       var layout = {
         barmode: 'stack',
         autosize: false,
-        width: 513,
-        height: 300,
+        width: 813,
+        height: 500,
         margin: {
           l: 50,
           r: 50,
@@ -104,6 +104,9 @@ function display({interest = 'side', demographic = current_demographic}) {
       Plotly.newPlot('data-vis-div', tracelist, layout, {responsive: true});
 
       document.getElementById('data-image').style.visibility = 'hidden';
+      document.getElementById('data-image').style.top = '100%';
+      document.getElementById('data-image').style.left = '100%';
+      document.getElementById('data-image').style.position = 'absolute';
 
       plotlygraph = document.getElementById('data-vis-div')
       plotlygraph.style.visibility = 'visible';
