@@ -38,8 +38,6 @@ def hello():
 def get_stats():
     data = []
 
-    #TODO MAKE SURE '/' CHARACTERS DO NOT END UP IN ARGS WHEN ARGS ARE AT THE END OF THE URL
-
     demographic = flask.request.args.get('demographic')
     interest = flask.request.args.get('interest')
 
@@ -84,7 +82,7 @@ def get_stats():
 
 
 
-@app.route('/random/')
+@app.route('/random')
 def get_random():
     random_respondent = []
 
@@ -127,8 +125,6 @@ def get_random():
 
     random_respondent.append(random_first_name)
     random_respondent.append(random_last_name)
-
-    #TODO MAKE DICTIONARY HERE WITH random_respondent RESULTS
 
     id = random_respondent[0][0]
     main_dish = random_respondent[0][1]
@@ -179,13 +175,9 @@ def get_random():
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
     " who eats " + cooked + " " + main_dish + " on Thankgiving. " + first_name + "swears by the tradition of "
     + cranberry_sauce + " cranberry sauce. Only the best for " + first_name + "! " + first_name +
-    " lives in a " + population_density + " area and their household makes around $" + income + "annually.")
+    " lives in a " + population_density + " area and their household makes around " + income + " USD annually.")
 
-    return json.dumps(random_response)
-
-
-
-
+    return json.dumps(story)
 
 
 
