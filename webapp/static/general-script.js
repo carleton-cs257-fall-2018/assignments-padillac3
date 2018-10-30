@@ -44,7 +44,6 @@ function getInterest(direction) {
 //Initialize random
 function random() {
   var url = getBaseWebURL() + '/random';
-  alert(url);
   document.location.href = url;
 }
 document.getElementById('random').onclick = random;

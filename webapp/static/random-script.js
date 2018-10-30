@@ -1,4 +1,3 @@
-alert("random page!")
 
 function getBaseAPIURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
