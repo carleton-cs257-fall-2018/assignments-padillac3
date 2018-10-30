@@ -20,7 +20,6 @@ var posX = '0px';
 var posY = '0px';
 
 
-
 //Initialize display function
 function display({interest = current_interest, demographic = current_demographic}) {
   current_demographic = demographic;
@@ -44,28 +43,25 @@ function display({interest = current_interest, demographic = current_demographic
         }
       }
 
-
-
       var layout = {
-        showlegend: false,
+        showlegend: true,
         autosize: false,
-        width: 250,
+        width: 600,
         height: 250,
         margin: {
-          l: 5,
-          r: 5,
-          b: 5,
-          t: 5,
+          l: 0,
+          r: 0,
+          b: 3,
+          t: 3,
           pad: 2
         }
       };
 
       for (key in formatted_data) {
         if (key != 'null') {
-          Plotly.newPlot((key + ' plotly'), formatted_data[key], layout);
+          Plotly.newPlot((key + ' plotly'), formatted_data[key], layout, {responsive: true});
         }
       }
-
 
     } else { //Other demographic choice
 
@@ -111,9 +107,7 @@ function display({interest = current_interest, demographic = current_demographic
     }
   }
 
-
   fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){parse_data(raw_data);});
-
 
   if (current_demographic == 'region') {
     var region_bit_maps = Array.from(document.getElementById('region-image-map').childNodes);
@@ -137,11 +131,7 @@ function display({interest = current_interest, demographic = current_demographic
       };
     }
   }
-
 }
-
-
-
 
 
 // Left hand side buttons
@@ -155,7 +145,6 @@ document.getElementById('population_density').onclick = function() {display({dem
 // Arrow buttons
 document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(1)})};
 document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-1)})};
-
 
 
 function getInterest(direction) {
@@ -176,7 +165,6 @@ function getInterest(direction) {
   current_interest = new_interest;
   return new_interest;
 }
-
 
 //Initialize random button to point to new page
 function random() {
