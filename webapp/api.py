@@ -175,11 +175,11 @@ def get_random():
             'friendsgiving': friendsgiving, 'age_cutoff': age_cutoff, 'side': side, 'pie': pie,
             'first_name': first_name, 'last_name': last_name}
 
-    story = "Hello, and welcome to " + first_name + " " + last_name +
+    story = ("Hello, and welcome to " + first_name + " " + last_name +
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
     " who eats " + cooked + " " + main_dish + " on Thankgiving. " + first_name + "swears by the tradition of "
     + cranberry_sauce + " cranberry sauce. Only the best for " + first_name + "! " + first_name +
-    " lives in a " + population_density + " area and their household makes around $" + income + "annually."
+    " lives in a " + population_density + " area and their household makes around $" + income + "annually.")
 
     return json.dumps(random_response)
 
