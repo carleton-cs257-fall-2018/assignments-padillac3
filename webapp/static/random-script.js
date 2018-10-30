@@ -29,3 +29,5 @@ function go_to_home_page() {
 document.getElementById('go_to_home_page').onclick = go_to_home_page;
 document.getElementById('back-button').onclick = go_to_home_page;
 document.getElementById('random').onclick = display_story;
+
+document.getElementsByTagName('body')[0].onload = function() {display_story;};
