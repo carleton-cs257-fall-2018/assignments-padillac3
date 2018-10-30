@@ -109,7 +109,7 @@ hr {
   visibility: hidden;
   border: 1px solid var(--maroon);
   float:left;
-  position: inherit;
+  position: absolute;
 }
 
 .js-plotly-plot:hover {
