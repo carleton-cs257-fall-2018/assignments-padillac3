@@ -18,10 +18,11 @@ var current_demographic = 'region'
 
 //Initialize map
 function display({interest = 'side', demographic = current_demographic}) {
-  current_demographic = demographic
+  current_demographic = demographic;
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
-  alert(url)
-  fetch (url, {method: 'get'}).then(function(response){return response.json();}).then(alert(json));
+  alert(url);
+  raw_data = fetch (url, {method: 'get'}).then(function(response){return response.json();});
+  alert(raw_data);
 }
 
 // Left hand side buttons
