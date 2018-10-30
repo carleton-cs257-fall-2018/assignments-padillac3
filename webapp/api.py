@@ -94,7 +94,6 @@ def get_random():
             cursor = connection.cursor()
             cursor.execute(query)
 
-
             side_query = "SELECT side FROM side_dish WHERE id = {0}".format(id)
             side_cursor = connection.cursor()
             side_cursor.execute(side_query)
@@ -175,7 +174,7 @@ def get_random():
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
     " who eats " + cooked + " " + main_dish + " on Thankgiving. " + first_name + "swears by the tradition of "
     + cranberry_sauce + " cranberry sauce. Only the best for " + first_name + "! " + first_name +
-    " lives in a " + population_density + " area and their household makes around " + income + " USD annually.")
+    " lives in a " + population_density + " area and their household makes around " + income + " annually.")
 
     return json.dumps(story)
 
