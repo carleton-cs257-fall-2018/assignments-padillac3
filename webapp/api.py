@@ -197,14 +197,14 @@ def get_random():
     story = ("Hello, and welcome to " + first_name + " " + last_name +
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
     " who eats " + cooked + " " + main_dish + gravy + " on Thankgiving. At "
-    + first_name + "'s Thanksgiving, everyone younger than" + str(age_cutoff)
+    + first_name + "'s Thanksgiving, everyone younger than " + str(age_cutoff)
     + " must sit at the kid's table. " + first_name + " swears by the tradition of "
     + cranberry_sauce + " cranberry sauce. Only the best for " + first_name +
     "! After " + pray + ", " + first_name + " devours their " + side[0] +
     " and then their " + dessert[0] + ". Even though they're sufficiently stuffed at this point, "
     + first_name + " always has room for the best Thanksgiving tradition of all: "
-    + pie[0] + " pie!" + first_name + " lives in a " + population_density +
-    " area in the " + region + " US, and their household makes " + income + " annually.")
+    + pie[0] + " pie! " + first_name + " lives in a " + population_density +
+    " area, and their household makes " + income + " annually.")
 
     return json.dumps(story)
 
