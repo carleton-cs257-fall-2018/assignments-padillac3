@@ -21,8 +21,7 @@ function display({interest = 'side', demographic = current_demographic}) {
   current_demographic = demographic
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
   alert(url)
-  //fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
-  alert(fetch(url, {method: 'get'}).json())
+  fetch (url, {method: 'get'}).then(function(response){return response.json()}).then(alert(json));
 }
 
 // Left hand side buttons
@@ -37,6 +36,7 @@ document.getElementById('left_arrow').onclick = function() {display({interest: g
 
 function getInterest(direction) {
   // TODO cycle through interests to return the next
+  //RETURN INNERHTML OF NEW LIST ITEM
 }
 
 //MAYBE GET RID OF THIS SCRIPT IF RANDOM IS MEANT TO LINK TO DIFFERENT HTML PAGE?
