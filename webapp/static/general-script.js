@@ -12,7 +12,12 @@ function getBaseWebURL() {
   return baseURL;
 }
 
-var current_demographic = 'region'
+//Initialize global variables
+var current_demographic = 'region';
+
+var posX = '0px';
+var posY = '0px';
+
 
 //Initialize demographics buttons
 
@@ -81,16 +86,25 @@ function display({interest = 'side', demographic = current_demographic}) {
 
   fetch(url, {method: 'get'}).then((response) => response.json()).then(function(raw_data){parse_data(raw_data);});
 
-  alert("A");
-  var region_bit_maps = document.getElementById('region-image-map').children;
-  alert("B");
-  for (var i = 0; i < region_bit_maps; i++) {
-    alert("loop");
-    region_bit_maps[i].onmouseover = function() {
-      plotlydiv = document.getElementById((region_bit_maps[i].id + ' plotly'));
+  var region_bit_maps = Array.from(document.getElementById('region-image-map').childNodes);
+
+
+  for (var i = 1; i < region_bit_maps.length; i+=2) {
+    region_bit_maps[i].onmousemove = function() {
+      var root = document.querySelector('html');
+      root.style.setProperty('--posX', (window.event.clientX - 126) + 'px');
+      root.style.setProperty('--posY', (window.event.clientY - 252) + 'px');
+      plotlydiv = document.getElementById((this.id + ' plotly'));
       plotlydiv.style.visibility = 'visible';
-      plotlydiv.style.top = 50%;
-      plotlydiv.style.left = 50%;
+      plotlydiv.style.top = 'var(--posY)';
+      plotlydiv.style.left = 'var(--posX)';
+      plotlydiv.onmouseover = function() {;};
+    };
+    region_bit_maps[i].onmouseout = function() {
+      plotlydiv = document.getElementById((this.id + ' plotly'));
+      plotlydiv.style.visibility = 'hidden';
+      plotlydiv.style.top = '100%';
+      plotlydiv.style.left = '100%';
     };
   }
   alert("C");

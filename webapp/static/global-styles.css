@@ -108,24 +108,12 @@ hr {
 .js-plotly-plot {
   visibility: hidden;
   border: 1px solid var(--maroon);
-  float: none;
+  /*float: none;*/
   top: 100%;
   left: 100%;
   position: absolute;
-  z-index: 0;
 }
 
-
-/*
-.svg-container {
-  border: 1px solid var(--maroon);
-  float:left;
-  top: 0;
-  left: 0;
-  width: 30;
-  position: absolute;
-  visibility: hidden;
-} */
 
 #interest-button-block {
   display: grid;
