@@ -68,7 +68,6 @@ function display({interest = 'side', demographic = current_demographic}) {
 
 
     } else { //Other demographic choice
-      alert("other demographic");
 
       var tracelist = [];
       var done_interest = {};
@@ -82,13 +81,12 @@ function display({interest = 'side', demographic = current_demographic}) {
           done_interest[tuple[1]] = tracelist.push({x: [tuple[0]], y: [tuple[2]], name: tuple[1], type: 'bar'});
         }
       }
-      alert(tracelist);
 
       var layout = {
         barmode: 'stack',
         autosize: false,
         width: 813,
-        height: 500,
+        height: 463,
         margin: {
           l: 50,
           r: 50,

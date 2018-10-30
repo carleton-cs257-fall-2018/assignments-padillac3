@@ -137,7 +137,7 @@ hr {
 }
 
 #interest-button-block > #left_arrow {
-  grid-column: 2/-4;
+  grid-column: 1/-4;
 }
 
 #left_arrow:hover {
@@ -152,7 +152,7 @@ hr {
 }
 
 #interest-button-block > #right_arrow {
-  grid-column: 4/-2;
+  grid-column: 4/-1;
 }
 
 #right_arrow:hover {
