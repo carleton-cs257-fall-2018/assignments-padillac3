@@ -108,12 +108,18 @@ hr {
 .js-plotly-plot {
   visibility: hidden;
   border: 1px solid var(--maroon);
-  float:left;
+  float: none;
+  top: 30%;
+  left: 50%;
   position: absolute;
 }
 
 .js-plotly-plot:hover {
   visibility: visible;
+}
+
+.plot-container {
+  pointer-events: none;
 }
 
 /*
