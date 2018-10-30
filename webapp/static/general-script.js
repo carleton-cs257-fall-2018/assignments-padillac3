@@ -29,13 +29,14 @@ function display({interest = 'side', demographic = current_demographic}) {
       var done_regions = [];
 
       for (var tuple in raw_data) {
+        alert(tuple)
         if (tuple[0] in done_regions) {
-          formatted_data[tuple[0]][0][labels].push(tuple[1]);
-          formatted_data[tuple[0]][0][values].push(tuple[2]);
+          formatted_data[tuple[0]][0].labels.push(tuple[1]);
+          formatted_data[tuple[0]][0].values.push(tuple[2]);
         } else {
           formatted_data[tuple[0]] = [{values: [], labels: [], type: 'pie'}];
-          formatted_data[tuple[0]][0][labels].push(tuple[1]);
-          formatted_data[tuple[0]][0][values].push(tuple[2]);
+          formatted_data[tuple[0]][0].labels.push(tuple[1]);
+          formatted_data[tuple[0]][0].values.push(tuple[2]);
           done_regions.push(tuple[0]);
         }
       }
