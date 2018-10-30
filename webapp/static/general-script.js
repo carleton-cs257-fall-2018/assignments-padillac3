@@ -73,7 +73,6 @@ function display({interest = 'side', demographic = current_demographic}) {
       var done_interest = {};
 
       for (let tuple of raw_data) {
-        //alert(tuple);
         if (Object.keys(done_interest).includes(tuple[1])) {
           tracelist[done_interest[tuple[1]]-1].x.push(tuple[0]);
           tracelist[done_interest[tuple[1]]-1].y.push(tuple[2]);
@@ -149,11 +148,22 @@ document.getElementById('age').onclick = function() {display({demographic: 'age'
 document.getElementById('gender').onclick = function() {display({demographic: 'gender'})};
 document.getElementById('population_density').onclick = function() {display({demographic: 'population_density'})};
 
+
+
+
+
+
+
 // Arrow buttons
-document.getElementById('right_arrow').onclick = function() {display({interest: getInterest('right')})};
-document.getElementById('left_arrow').onclick = function() {display({interest: getInterest('left')})};
+document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(1)})};
+document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-1)})};
 
 function getInterest(direction) {
+  interests = Array.from(document.getElementById('interest-button-list').childNodes);
+
+  for (let i of interests) {
+    alert(i);
+  }
   // TODO cycle through interests to return the next
   //RETURN INNERHTML OF NEW LIST ITEM
 }
