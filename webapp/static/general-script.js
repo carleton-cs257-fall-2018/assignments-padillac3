@@ -155,21 +155,27 @@ document.getElementById('population_density').onclick = function() {display({dem
 
 
 // Arrow buttons
-document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(1)})};
-document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-1)})};
+document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(2)})};
+document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-2)})};
 
 function getInterest(direction) {
-  interests = Array.from(document.getElementById('interest-button-list').childNodes);
+  interests = [];
+  Array.from(document.getElementById('interest-button-list').childNodes).forEach(function(element) {
+    interests.push(element.id);
+  });
 
-  for (let i of interests) {
-    alert(i);
-  }
-  // TODO cycle through interests to return the next
-  //RETURN INNERHTML OF NEW LIST ITEM
+  current_interest = document.getElementById('selected-interest-button').name;
+
+  current_index = interests.indexOf(current_interest);
+
+  new_interest = interests[(current_index + direction)];
+
+  document.getElementById('selected-interest-button').name = new_interest;
+  document.getElementById('selected-interest-button').innerHTML = document.getElementById(new_interest).innerHTML;
+
+  return new_interest;
 }
 
-
-//////////do we need these (below) in this file??
 
 //Initialize random
 function random() {
