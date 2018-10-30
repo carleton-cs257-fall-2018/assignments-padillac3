@@ -141,7 +141,7 @@ def get_random():
     stuffing = random_respondent[0][4]
 
     pray = random_respondent[0][5]
-    if pray = "true":
+    if pray == "true":
         pray = "praying"
     else:
         pray = "washing their hands"
