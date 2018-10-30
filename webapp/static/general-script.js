@@ -32,7 +32,8 @@ function display({interest = 'side', demographic = current_demographic}) {
       //alert("INITIAL FORMATTED DATA" + formatted_data);
       for (let tuple of raw_data) {
         //alert("TUPLE: " + tuple);
-        if (tuple[0] in done_regions) {
+        if (done_regions.includes(tuple[0])) {
+          alert("TRUE");
           formatted_data[tuple[0]][0].labels.push(tuple[1]);
           formatted_data[tuple[0]][0].values.push(tuple[2]);
         } else {
@@ -46,13 +47,14 @@ function display({interest = 'side', demographic = current_demographic}) {
 
       alert("DONE PARSING: " + formatted_data);
 
+      alert(JSON.stringify(formatted_data));
+
       document.getElementById('PLOTLYTEST').INNERHTML = formatted_data;
 
-      //var plot_layout = {height:400, width:500};
 
       for (key in formatted_data) {
         if (key != 'null') {
-          alert(key);
+          alert(key + " : " + formatted_data[key]);
           Plotly.newPlot(key, formatted_data[key]);
         }
       }
