@@ -11,10 +11,10 @@ function getBaseWebURL() {
 
 function display_story() {
   var url = getBaseAPIURL() + "/random";
-  fetch(url, {method: 'get'}).then((response) => response.json()).then(function() {
+  fetch(url, {method: 'get'}).then((response) => response.json()).then(function(story) {
     var text_location = document.getElementById('story');
     if (text_location) {
-      text_location.innerHTML = response;
+      text_location.innerHTML = story;
     }
   });
 
