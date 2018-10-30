@@ -105,6 +105,26 @@ hr {
   padding-bottom: none;
 }
 
+.js-plotly-plot {
+  /*visibility: hidden;*/
+  border: 1px solid var(--maroon);
+  float:left;
+  top: inherit;
+  left: inherit;
+  position:absolute;
+}
+
+/*
+.svg-container {
+  border: 1px solid var(--maroon);
+  float:left;
+  top: 0;
+  left: 0;
+  width: 30;
+  position: absolute;
+  visibility: hidden;
+} */
+
 #interest-button-block {
   display: grid;
   grid-template-columns: 1fr 80px minmax(200px,500px) 80px 1fr;
@@ -118,11 +138,11 @@ hr {
   transition-duration: .4s;
 }
 
-#interest-button-block > #interest-left {
+#interest-button-block > #left_arrow {
   grid-column: 2/-4;
 }
 
-#interest-left:hover {
+#left_arrow:hover {
   background-color: var(--maroon);
   color: white;
 }
@@ -133,11 +153,11 @@ hr {
   border-right: 2px solid var(--maroon);
 }
 
-#interest-button-block > #interest-right {
+#interest-button-block > #right_arrow {
   grid-column: 4/-2;
 }
 
-#interest-right:hover {
+#right_arrow:hover {
   background-color: var(--maroon);
   color: white;
 }
