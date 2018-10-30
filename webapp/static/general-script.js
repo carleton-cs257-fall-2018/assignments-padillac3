@@ -19,7 +19,8 @@ var current_demographic = 'region'
 function display(interest = 'side', demographic = current_demographic) {
   current_demographic = demographic
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
-  fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
+  alert(url)
+  //fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
 }
 // Left hand side buttons
 document.getElementById('map').onclick = display(demographic = 'map');
