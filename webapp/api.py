@@ -38,8 +38,6 @@ def hello():
 def get_stats():
     data = []
 
-    #TODO MAKE SURE '/' CHARACTERS DO NOT END UP IN ARGS WHEN ARGS ARE AT THE END OF THE URL
-
     demographic = flask.request.args.get('demographic')
     interest = flask.request.args.get('interest')
 
@@ -84,7 +82,7 @@ def get_stats():
 
 
 
-@app.route('/random/')
+@app.route('/random')
 def get_random():
     random_respondent = []
 
@@ -95,7 +93,6 @@ def get_random():
             query = "SELECT DISTINCT main_food.id, main_dish, cranberry_sauce, cooked, stuffing, pray, region, income, travel, black_friday_shop, work_retail, work_black_friday, gravy, population_density, gender, age, friendsgiving, age_cutoff FROM main_food, side_dish, pie, dessert, demographics WHERE main_food.id = {0} AND side_dish.id = {0} AND pie.id = {0} AND dessert.id = {0} AND demographics.id = {0}".format(id)
             cursor = connection.cursor()
             cursor.execute(query)
-
 
             side_query = "SELECT side FROM side_dish WHERE id = {0}".format(id)
             side_cursor = connection.cursor()
@@ -127,8 +124,6 @@ def get_random():
 
     random_respondent.append(random_first_name)
     random_respondent.append(random_last_name)
-
-    #TODO MAKE DICTIONARY HERE WITH random_respondent RESULTS
 
     id = random_respondent[0][0]
     main_dish = random_respondent[0][1]
@@ -179,13 +174,9 @@ def get_random():
     "'s Thanksgiving. " + first_name + " is a " + age + " year old " + gender +
     " who eats " + cooked + " " + main_dish + " on Thankgiving. " + first_name + "swears by the tradition of "
     + cranberry_sauce + " cranberry sauce. Only the best for " + first_name + "! " + first_name +
-    " lives in a " + population_density + " area and their household makes around $" + income + "annually.")
+    " lives in a " + population_density + " area and their household makes around " + income + " annually.")
 
-    return json.dumps(random_response)
-
-
-
-
+    return json.dumps(story)
 
 
 
