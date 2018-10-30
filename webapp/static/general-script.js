@@ -29,7 +29,7 @@ function display({interest = 'side', demographic = current_demographic}) {
       var done_regions = [];
 
       alert(raw_data);
-      for (var tuple in raw_data) {
+      for (let tuple of raw_data) {
         alert(tuple);
         if (tuple[0] in done_regions) {
           formatted_data[tuple[0]][0].labels.push(tuple[1]);
