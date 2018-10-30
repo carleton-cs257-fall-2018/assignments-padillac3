@@ -9,6 +9,7 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/')
 def get_main_page():
+    global api_port
     # figure out how to change url in browser when re-routing
     return get_map_page()
 
