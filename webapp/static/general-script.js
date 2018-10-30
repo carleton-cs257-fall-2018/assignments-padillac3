@@ -27,14 +27,14 @@ function display({interest = 'side', demographic = current_demographic}) {
 //TODO: CHANGE ALL ONCLICKS TO NOT ACTUALLY CALL THE FUNCTION (parentheses) --CALL A NAMELESS FUNCTION INSTEAD WHICH UPDATES current_demographic AND THEN CALLS THE DISPLAY FUNCTION?
 
 // Left hand side buttons
-//document.getElementById('map').onclick = display({demogrpahic: 'map'});
-//document.getElementById('age').onclick = display_age({demographic: 'age'});
-//document.getElementById('gender').onclick = display_graph({demographic: 'gender'});
-//document.getElementById('population_density').onclick = display_graph({demographic: 'population_density');
+document.getElementById('map').onclick = display({demogrpahic: 'map'});
+document.getElementById('age').onclick = display_age({demographic: 'age'});
+document.getElementById('gender').onclick = display_graph({demographic: 'gender'});
+document.getElementById('population_density').onclick = display_graph({demographic: 'population_density');
 
 // Arrow buttons
-//document.getElementById('right_arrow').onclick = display_map({interest: getInterest('right')});
-//document.getElementById('left_arrow').onclick = display_map({interest: getInterest('left')});
+document.getElementById('right_arrow').onclick = display_map({interest: getInterest('right')});
+document.getElementById('left_arrow').onclick = display_map({interest: getInterest('left')});
 
 function getInterest(direction) {
   // TODO cycle through interests to return the next
