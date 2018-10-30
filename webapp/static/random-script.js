@@ -14,3 +14,4 @@ function go_to_home_page() {
   document.location.href = getBaseWebURL();
 }
 document.getElementById('go_to_home_page').onclick = go_to_home_page;
+document.getElementById('back-button').onclick = go_to_home_page;

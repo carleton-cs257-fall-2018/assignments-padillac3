@@ -88,6 +88,9 @@ function getInterest(direction) {
   //RETURN INNERHTML OF NEW LIST ITEM
 }
 
+
+//////////do we need these (below) in this file??
+
 //Initialize random
 function random() {
   var url = getBaseWebURL() + '/random';
