@@ -2,9 +2,13 @@
 // Chris Padilla and Yasmeen Awad
 
 
-function getBaseURL() {
+function getBaseAPIURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
     return baseURL;
+}
+
+function getBaseWebURL() {
+  var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 }
 
 var current_demographic = 'region'
@@ -14,7 +18,7 @@ var current_demographic = 'region'
 //Initialize map
 function display(interest = 'side', demographic = current_demographic) {
   current_demographic = demographic
-  var url = getBaseURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
+  var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
   fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
 }
 // Left hand side buttons
@@ -34,7 +38,7 @@ function getInterest(direction) {
 //MAYBE GET RID OF THIS SCRIPT IF RANDOM IS MEANT TO LINK TO DIFFERENT HTML PAGE?
 //Initialize random
 function random() {
-  var url = getBaseURL() + '/random/';
+  var url = getBaseWebURL() + '/random/';
   alert(url);
   document.location.href = url;
 }
