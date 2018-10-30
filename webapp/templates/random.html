@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
+  <title>Thanksgiving</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
   <link rel="stylesheet" href="../static/global-styles.css">
+  <script>var api_port = {{api_port}}</script>
   <script type="text/javascript" src="../static/random-script.js" defer></script>
 
 </head>
@@ -16,8 +19,18 @@
     </div>
   </header>
 
+  <hr>
+
+  <div id="demographic-button-group">
+    <button class="demographic-button" id="back-button"><i class="fas fa-angle-double-left" style="font-size:20px;"></i> &nbsp;&nbsp;&nbsp;&nbsp; Back to Map</button>
+    <hr>
+    <button class="demographic-button" id="random">Another Random Story!</button>
+  </div>
+
+  <hr>
+
   <div id="story-block">
-    <h2>A Story about a random person's Thanksgiving!!</h2>
+    <h2>A story about a random person's Thanksgiving!!</h2>
 
     <p id="story">The Story....</p>
 
