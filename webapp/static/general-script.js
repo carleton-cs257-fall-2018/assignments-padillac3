@@ -24,7 +24,7 @@ function display(interest = 'side', demographic = current_demographic) {
   //fetch (url, {method: 'get'}).then((response) => response.json()).then(alert(response));
 }
 // Left hand side buttons
-document.getElementById('map').onclick = display {demographic = 'map'};
+document.getElementById('map').addEventListener("click", display, {demographic = map});
 //document.getElementById('age').onclick = display_age(demographic = 'age');
 //document.getElementById('gender').onclick = display_graph(demographic = 'gender');
 //document.getElementById('population_density').onclick = display_graph(demographic = 'population_density');
