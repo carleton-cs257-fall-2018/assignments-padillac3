@@ -19,7 +19,6 @@ function display_story() {
   var url = getBaseAPIURL() + "/random";
   fetch(url, {method: 'get'}).then((response) => response.json()).then(function(story) {
     document.getElementById('story').innerHTML = story;
-    alert("story:" + story);
   });
 }
 

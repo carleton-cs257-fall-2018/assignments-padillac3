@@ -38,6 +38,7 @@ h2 {
 }
 
 #nav-button-group {
+  visibility: hidden;
   display: flex;
   flex-direction: row;
   height: auto;
