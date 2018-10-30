@@ -40,7 +40,7 @@ function getInterest(direction) {
 //MAYBE GET RID OF THIS SCRIPT IF RANDOM IS MEANT TO LINK TO DIFFERENT HTML PAGE?
 //Initialize random
 function random() {
-  var url = getBaseWebURL() + '/random/';
+  var url = getBaseWebURL() + '/random';
   alert(url);
   document.location.href = url;
 }
