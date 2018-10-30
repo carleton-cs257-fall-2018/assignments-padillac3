@@ -24,13 +24,13 @@ function display(interest = 'side', demographic = current_demographic) {
 }
 // Left hand side buttons
 document.getElementById('map').onclick = display(demographic = 'map');
-document.getElementById('age').onclick = display_age(demographic = 'age');
-document.getElementById('gender').onclick = display_graph(demographic = 'gender');
-document.getElementById('population_density').onclick = display_graph(demographic = 'population_density');
+//document.getElementById('age').onclick = display_age(demographic = 'age');
+//document.getElementById('gender').onclick = display_graph(demographic = 'gender');
+//document.getElementById('population_density').onclick = display_graph(demographic = 'population_density');
 
 // Arrow buttons
-document.getElementById('right_arrow').onclick = display_map(interest = getInterest('right'));
-document.getElementById('left_arrow').onclick = display_map(interest = getInterest('left'));
+//document.getElementById('right_arrow').onclick = display_map(interest = getInterest('right'));
+//document.getElementById('left_arrow').onclick = display_map(interest = getInterest('left'));
 
 function getInterest(direction) {
   // TODO cycle through interests to return the next
