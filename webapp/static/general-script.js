@@ -30,12 +30,12 @@ function display({interest = 'side', demographic = current_demographic}) {
 
       for (var tuple in raw_data) {
         if (tuple[0] in done_regions) {
-          formatted_data[tuple[0]][labels].push(tuple[1]);
-          formatted_data[tuple[0]][values].push(tuple[2]);
+          formatted_data.tuple[0][0][labels].push(tuple[1]);
+          formatted_data.tuple[0][0][values].push(tuple[2]);
         } else {
-          formatted_data[tuple[0]] = [{values: [], labels: [], type: 'pie'}];
-          formatted_data[tuple[0]][labels].push(tuple[1]);
-          formatted_data[tuple[0]][values].push(tuple[2]);
+          formatted_data.tuple[0] = [{values: [], labels: [], type: 'pie'}];
+          formatted_data.tuple[0][0][labels].push(tuple[1]);
+          formatted_data.tuple[0][0][values].push(tuple[2]);
           done_regions.push(tuple[0]);
         }
       }
@@ -43,7 +43,7 @@ function display({interest = 'side', demographic = current_demographic}) {
       alert(formatted_data);
 
 
-      //{'pacific': [{values: [], labels: [], type: 'pie'}] }
+      {'pacific': [{values: [], labels: [], type: 'pie'}] }
 
 
     } else { //Other demographic choice
