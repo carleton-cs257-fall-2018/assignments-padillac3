@@ -100,3 +100,4 @@ function random() {
   document.location.href = url;
 }
 document.getElementById('random').onclick = random;
+document.getElementById('back-button').onclick = display;
