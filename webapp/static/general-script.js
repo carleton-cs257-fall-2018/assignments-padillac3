@@ -43,7 +43,7 @@ function display({interest = 'side', demographic = current_demographic}) {
       alert(formatted_data);
 
 
-      {'pacific': [{values: [], labels: [], type: 'pie'}] }
+      //{'pacific': [{values: [], labels: [], type: 'pie'}] }
 
 
     } else { //Other demographic choice
