@@ -97,9 +97,13 @@ function getInterest(direction) {
   //RETURN INNERHTML OF NEW LIST ITEM
 }
 
+
+//////////do we need these (below) in this file??
+
 //Initialize random
 function random() {
   var url = getBaseWebURL() + '/random';
   document.location.href = url;
 }
 document.getElementById('random').onclick = random;
+document.getElementById('back-button').onclick = display;

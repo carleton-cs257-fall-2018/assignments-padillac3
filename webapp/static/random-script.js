@@ -9,8 +9,21 @@ function getBaseWebURL() {
   return baseURL;
 }
 
+function display_story() {
+  var url = getBaseAPIURL() + "/random";
+  fetch(url, {method: 'get'}).then((response) => response.json()).then(function() {
+    var text_location = document.getElementById('story');
+    if (text_location) {
+      text_location.innerHTML = response;
+    }
+  });
+
+}
+
 //Initialize home page button
 function go_to_home_page() {
   document.location.href = getBaseWebURL();
 }
 document.getElementById('go_to_home_page').onclick = go_to_home_page;
+document.getElementById('back-button').onclick = go_to_home_page;
+document.getElementById('random').onclick = display_story;
