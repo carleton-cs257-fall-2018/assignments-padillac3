@@ -9,6 +9,7 @@ function getBaseAPIURL() {
 
 function getBaseWebURL() {
   var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+  return baseURL;
 }
 
 var current_demographic = 'region'
