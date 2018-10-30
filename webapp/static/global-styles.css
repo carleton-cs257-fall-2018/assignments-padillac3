@@ -106,12 +106,14 @@ hr {
 }
 
 .js-plotly-plot {
-  /*visibility: hidden;*/
+  visibility: hidden;
   border: 1px solid var(--maroon);
   float:left;
-  top: inherit;
-  left: inherit;
-  position:absolute;
+  position: inherit;
+}
+
+.js-plotly-plot:hover {
+  visibility: visible;
 }
 
 /*

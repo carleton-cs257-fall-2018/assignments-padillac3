@@ -42,23 +42,22 @@ function display({interest = 'side', demographic = current_demographic}) {
 
 
       var layout = {
+        showlegend: false,
         autosize: false,
-        width: 300,
-        height: 300,
+        width: 270,
+        height: 270,
         margin: {
-          l: 10,
-          r: 10,
-          b: 10,
-          t: 10,
+          l: 5,
+          r: 5,
+          b: 5,
+          t: 5,
           pad: 2
-        },
-        paper_bgcolor: '#7f7f7f',
-        plot_bgcolor: '#c7c7c7'
+        }
       };
 
       for (key in formatted_data) {
         if (key != 'null') {
-          Plotly.newPlot(key, formatted_data[key]);
+          Plotly.newPlot(key, formatted_data[key], layout);
         }
       }
 
