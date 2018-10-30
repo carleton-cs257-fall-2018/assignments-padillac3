@@ -14,15 +14,15 @@ function getBaseWebURL() {
 
 //Initialize global variables
 var current_demographic = 'region';
+var current_interest = 'side';
 
 var posX = '0px';
 var posY = '0px';
 
 
-//Initialize demographics buttons
 
-//Initialize map
-function display({interest = 'side', demographic = current_demographic}) {
+//Initialize display function
+function display({interest = current_interest, demographic = current_demographic}) {
   current_demographic = demographic;
   var url = getBaseAPIURL() + '/map?' + 'interest=' + interest + '&demographic=' + demographic;
 
@@ -141,6 +141,9 @@ function display({interest = 'side', demographic = current_demographic}) {
 }
 
 
+
+
+
 // Left hand side buttons
 document.getElementsByTagName('body')[0].onload = function() {display({demographic: 'region'})};
 document.getElementById('map').onclick = function() {var url = getBaseWebURL(); document.location.href = url};
@@ -149,35 +152,33 @@ document.getElementById('gender').onclick = function() {display({demographic: 'g
 document.getElementById('population_density').onclick = function() {display({demographic: 'population_density'})};
 
 
-
-
-
-
-
 // Arrow buttons
-document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(2)})};
-document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-2)})};
+document.getElementById('right_arrow').onclick = function() {display({interest: getInterest(1)})};
+document.getElementById('left_arrow').onclick = function() {display({interest: getInterest(-1)})};
+
+
 
 function getInterest(direction) {
   interests = [];
   Array.from(document.getElementById('interest-button-list').childNodes).forEach(function(element) {
-    interests.push(element.id);
+    if (element.tagName == 'LI'){interests.push(element.id);}
   });
-
-  current_interest = document.getElementById('selected-interest-button').name;
 
   current_index = interests.indexOf(current_interest);
 
-  new_interest = interests[(current_index + direction)];
+  if (((current_index + direction) % interests.length) == -1) {current_index = 16}
+
+  new_interest = interests[((current_index + direction) % interests.length)];
 
   document.getElementById('selected-interest-button').name = new_interest;
   document.getElementById('selected-interest-button').innerHTML = document.getElementById(new_interest).innerHTML;
 
+  current_interest = new_interest;
   return new_interest;
 }
 
 
-//Initialize random
+//Initialize random button to point to new page
 function random() {
   var url = getBaseWebURL() + '/random';
   document.location.href = url;
