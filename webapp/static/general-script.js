@@ -27,7 +27,7 @@ function display({interest = 'side', demographic = current_demographic}) {
 //TODO: CHANGE ALL ONCLICKS TO NOT ACTUALLY CALL THE FUNCTION (parentheses) --CALL A NAMELESS FUNCTION INSTEAD WHICH UPDATES current_demographic AND THEN CALLS THE DISPLAY FUNCTION?
 
 // Left hand side buttons
-document.getElementById('map').onclick = display({demogrpahic: 'map'});
+document.getElementById('map').onclick = function() {display({demographic: 'map'})};
 document.getElementById('age').onclick = display({demographic: 'age'});
 document.getElementById('gender').onclick = display({demographic: 'gender'});
 document.getElementById('population_density').onclick = display({demographic: 'population_density'});
