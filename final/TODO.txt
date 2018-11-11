@@ -1,4 +1,2 @@
  - Fill out function stubs for all classes
  - Create build configuration and make sure program builds and runs
- - Finish README file
- - 
