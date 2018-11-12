@@ -12,7 +12,11 @@ import javafx.scene.shape.Rectangle;
 public class View extends Group{
 
     public View() {
+
     }
 
+    public void update(Model model) {
+        //DO SOMETHING WITH DATA FROM MODEL
+    }
 
 }

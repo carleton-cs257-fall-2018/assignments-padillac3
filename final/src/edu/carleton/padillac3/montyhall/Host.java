@@ -10,7 +10,7 @@ import java.util.Random;
 public class Host {
     private int numberOfDoors;
     private int carDoor;
-    ArrayList<Door> doorList;
+    public ArrayList<Door> doorList = new ArrayList<Door>();
 
     public Host(int numberOfDoors){
         this.numberOfDoors = numberOfDoors;

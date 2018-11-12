@@ -12,20 +12,27 @@ public class Controller implements EventHandler<KeyEvent> {
     private Model Model;
 
     public Controller() {
+
     }
 
 
     public void initialize() {
-
+        this.Model = new Model();
+        this.update();
     }
 
     private void update(){
+        this.View.update(this.Model);
         this.topLabel.setText("Monty Hall Problem!");
     }
 
 
     @Override
     public void handle(KeyEvent keyEvent) {
+        //FIGURE OUT HOW TO GET MOUSE EVENT AND GET USER DOOR/BUTTON SELECTION
+
+
+        this.update();
     }
 
 

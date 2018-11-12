@@ -16,6 +16,8 @@
         <View fx:id="View" />
     </center>
 
+
+
     <!--
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">

@@ -10,7 +10,7 @@ public class Model {
     public PlayerStats stats;
 
     public Model() {
-
+        this.newGame(3);
     }
 
     public void newGame(int numberOfDoors){
