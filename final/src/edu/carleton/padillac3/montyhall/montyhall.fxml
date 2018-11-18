@@ -1,29 +1,44 @@
-<?import javafx.scene.layout.AnchorPane?><?import edu.carleton.padillac3.montyhall.View?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane fx:controller="edu.carleton.padillac3.montyhall.Controller" xmlns:fx="http://javafx.com/fxml">
-    <!-- See https://apps.carleton.edu/creativeservices/identity/college_colors/ for official Carleton colors -->
-    <top>
-        <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >
-            <left><Label fx:id="topLabel" style="-fx-font-size: 150%; -fx-text-fill: white" /></left>
-
-        </BorderPane>
-    </top>
-
-    <center>
-        <View fx:id="View" />
-    </center>
-
+<?import edu.carleton.padillac3.montyhall.Door?>
+<?import edu.carleton.padillac3.montyhall.Host?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.Image?>
+<?import edu.carleton.padillac3.montyhall.Host?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Parent?>
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane fx:controller="edu.carleton.padillac3.montyhall.Controller" xmlns:fx="http://javafx.com/fxml"
+            AnchorPane.topAnchor="60" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="20"
+            style="-fx-background-color: #fff; -fx-border-color:black; -fx-border-width:1px 0px 1px 0px;">
 
 
-    <!--
-    <bottom>
-        <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Label style="-fx-font-size: 140%; -fx-text-fill: white"
-                   text="Help: ? / Teleport: T / Stay: S / Move: W E D C X Z A / New game: G" />
-        </HBox>
-    </bottom>
-    -->
-</BorderPane>
+
+        <Door fx:id="door1" AnchorPane.bottomAnchor="15" layoutX="50"  >
+            <Image url="@door-closed.jpg"/>
+        </Door>
+        <Door fx:id="door2" AnchorPane.bottomAnchor="15" layoutX="275"  >
+            <Image url="@door-closed.jpg"/>
+        </Door>
+        <Door fx:id="door3" AnchorPane.bottomAnchor="15" layoutX="500"  >
+            <Image url="@door-closed.jpg"/>
+        </Door>
+        <Host fx:id="host" AnchorPane.bottomAnchor="15" layoutX="725">
+            <Image url="@Gameshowhost.png"/>
+        </Host>
+        <StackPane>
+            <Rectangle AnchorPane.bottomAnchor="420" layoutX="50" height="120" width="820" fill="lightgrey"/>
+
+            <Label fx:id="speechBubble" text="test." style="-fx-font-size: 20px; -fx-text-alignment: center;"/>
+        </StackPane>
+        <Label fx:id="labelA" text="A" style="-fx-font-size:48px; -fx-font-style:bold;" AnchorPane.bottomAnchor="15" layoutX="110"/>
+        <Label fx:id="labelB" text="B" style="-fx-font-size:48px; -fx-font-style:bold;" AnchorPane.bottomAnchor="15" layoutX="345"/>
+        <Label fx:id="labelC" text="C" style="-fx-font-size:48px; -fx-font-style:bold;" AnchorPane.bottomAnchor="15" layoutX="565"/>
+
+        <Label fx:id="statsLabel" text="" style="-fx-font-size:18px; -fx-font-style:bold;" AnchorPane.bottomAnchor="360" layoutX="680"/>
+
+
+</AnchorPane>

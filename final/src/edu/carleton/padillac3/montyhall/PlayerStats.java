@@ -1,7 +1,5 @@
 package edu.carleton.padillac3.montyhall;
 
-import java.util.ArrayList;
-import java.lang.Math;
 
 /**
  * This class stores information about the current session, how many games the player has played and won.
