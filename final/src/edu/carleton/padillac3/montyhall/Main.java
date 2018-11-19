@@ -16,7 +16,7 @@ public class Main extends Application {
 
         Controller controller = loader.getController();
         root.setOnKeyPressed(controller);
-        primaryStage.setScene(new Scene(root, 900, 600));
+        primaryStage.setScene(new Scene(root, 950, 600));
         primaryStage.show();
         root.requestFocus();
     }

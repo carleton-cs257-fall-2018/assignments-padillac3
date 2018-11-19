@@ -44,7 +44,7 @@ public class Controller implements EventHandler<KeyEvent> {
     private void turnOne(char guess){
 
         //CHANGE SPEECH BUBBLE
-        this.host.speak("Good guess. Now I will reveal a goat to you,\nfrom one of the doors you did not choose. OOH! A goat!\nNow you have one final chance to change your guess.\nPick one of the remaining closed doors, and we will see if you win a car.");
+        this.host.speak("Before I reveal the door you picked, (your choice is highlighted in red)\nHere is a goat. Now you know the car is behind either your door,\nor the other closed door. Will you change your guess?");
 
         try {TimeUnit.SECONDS.sleep(1);} catch (InterruptedException e) {}
         //REVEAL GOAT
@@ -71,10 +71,11 @@ public class Controller implements EventHandler<KeyEvent> {
         }
 
         //UPDATE STATS
-        this.model.stats.addGame(win);
+        boolean switched = (this.model.guessOne != this.model.guessTwo);
+        this.model.stats.addGame(win, switched);
         float[] stats = this.model.stats.getStats();
 
-        String statsDisplay = ("Games Played: " + stats[0] + "\nGames Won: " + stats[1] + "\nWin Percentage: " + stats[2]);
+        String statsDisplay = ("Games Played: " + stats[0] + "\nGames Won: " + stats[1] + "\nWins when you\nchange doors: " + stats[2] + "%\nWins when you don't\nchange doors: " + stats[3] + "%");
 
         //DISPLAY STATS
         this.statsLabel.setText(statsDisplay);
